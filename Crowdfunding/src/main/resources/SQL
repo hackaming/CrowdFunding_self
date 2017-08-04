@@ -1,0 +1,11 @@
+User table:
+ create table user(
+ UserName varchar (15) not null,
+ UserId INT auto_increment,
+ CreateDateTime varchar (30),
+ Status int unsigned,
+ Password varchar (200),
+ CellPhone varchar (13),
+ Sex varchar (4),
+ primary key(UserId)
+);
