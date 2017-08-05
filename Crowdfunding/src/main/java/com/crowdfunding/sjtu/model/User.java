@@ -14,6 +14,8 @@ import javax.persistence.Table;
 @Table(name = "User")
 public class User{
 	public String userName;
+	public String cellPhone;
+
 	public String creatDate;
 	public int status;
 	public String password;
@@ -93,5 +95,16 @@ public class User{
 		this.userId = userId;
 	}
 	
-
+	/**
+	 * @return the cellPhone
+	 */
+	public String getCellPhone() {
+		return cellPhone;
+	}
+	/**
+	 * @param cellPhone the cellPhone to set
+	 */
+	public void setCellPhone(String cellPhone) {
+		this.cellPhone = cellPhone;
+	}
 }

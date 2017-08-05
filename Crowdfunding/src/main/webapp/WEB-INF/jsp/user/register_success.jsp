@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>New Crowdfunding</title>
+<title>register successful</title>
 </head>
 <body>
-New Crowdfunding
+register successful
 </body>
 </html>
