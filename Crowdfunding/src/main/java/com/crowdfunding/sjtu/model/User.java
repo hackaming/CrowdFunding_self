@@ -16,12 +16,25 @@ public class User{
 	public String userName;
 	public String cellPhone;
 
-	public String creatDate;
+public String createDateTime;
+              
 	public int status;
 	public String password;
 	public String sex;
 	@Id
 	public int userId;
+	/**
+	 * @return the createDateTime
+	 */
+	public String getCreateDateTime() {
+		return createDateTime;
+	}
+	/**
+	 * @param createDateTime the createDateTime to set
+	 */
+	public void setCreateDateTime(String createDateTime) {
+		this.createDateTime = createDateTime;
+	}
 	/**
 	 * @return the userName
 	 */
@@ -34,18 +47,8 @@ public class User{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	/**
-	 * @return the creatDate
-	 */
-	public String getCreatDate() {
-		return creatDate;
-	}
-	/**
-	 * @param creatDate the creatDate to set
-	 */
-	public void setCreatDate(String creatDate) {
-		this.creatDate = creatDate;
-	}
+
+
 	/**
 	 * @return the status
 	 */
