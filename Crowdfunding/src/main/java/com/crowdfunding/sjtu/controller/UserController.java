@@ -30,12 +30,27 @@ public class UserController {
 	
 	@RequestMapping("/index")
 	public String getHome(){
-		return "project/projectlist";
+		return "project/projec_tlist";
 	}
 	
 	@RequestMapping("/login")
 	public String login(){
-		return "login";
+		return "user/login";
+	}
+	
+	@RequestMapping(value="/user/log",method = RequestMethod.POST)
+	public String login1(HttpServletRequest req){
+		String userName = req.getParameter("userName");
+		String password = req.getParameter("password");
+		//org.hibernate.QueryException: Not all named parameters have been set: [userName] [from User u where u.userName =:userName]
+		//这个地方有BUG，暂时不知道什么原因，无法登录，报SQU QUERY ERROR，先放这里吧。
+		if ( !userServie.login(userName, password) ){
+			//login failure
+			return "user/login_failure";
+		} else {
+			//login successfully
+			return "user/login_success";			
+		}
 	}
 	
 	//get the parameters and save it into db and then return a succ/failure page to the user

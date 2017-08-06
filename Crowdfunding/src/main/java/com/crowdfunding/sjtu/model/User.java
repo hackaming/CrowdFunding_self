@@ -13,16 +13,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "User")
 public class User{
-	public String userName;
-	public String cellPhone;
+	private String userName;
+	private String cellPhone;
 
-public String createDateTime;
+private String createDateTime;
               
-	public int status;
-	public String password;
-	public String sex;
+	private int status;
+	private String password;
+	private String sex;
 	@Id
-	public int userId;
+	private int userId;
 	/**
 	 * @return the createDateTime
 	 */

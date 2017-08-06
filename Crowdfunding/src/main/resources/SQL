@@ -9,3 +9,19 @@ User table:
  Sex varchar (4),
  primary key(UserId)
 );
+
+Project Table:
+create table project(
+ProjectId int auto_increment,
+ProjectName varchar(25) not null,
+CreateDateTime varchar(30),
+Status int unsigned,
+Description varchar(250),
+ImageName varchar(50),
+Location varchar(25),
+DeadDate varchar(30),
+TotalShares int,
+Price float,
+Comment varchar(50),
+primary key(ProjectId)
+);

@@ -69,7 +69,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public User getUserById(Integer userId) {
 		// TODO Auto-generated method stub
-		Query query = sessionfactory.getCurrentSession().createQuery("from User u where u.userId =: userId");
+		Query query = sessionfactory.getCurrentSession().createQuery("from User u where u.userId =:userId");
 		query.setInteger("userId", userId);
 		List<User> u = query.list();
 		if (u.size() > 0) {
@@ -112,7 +112,7 @@ public class UserDaoImpl implements IUserDao {
 
 	@Override
 	public User getUserByName(String userName) {
-		Query query = sessionfactory.getCurrentSession().createQuery("from User u where u.userName =: userName");
+		Query query = sessionfactory.getCurrentSession().createQuery("from User u where u.userName =:userName");
 		List<User> ulist = query.list();
 		if (ulist.size() > 0) {
 			return ulist.get(0);

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form name="login" action="/login" method="post">
+<form name="login" action="/Crowdfunding/user/log" method="post">
 用户名：<input type="text" name=“userName” /> <br>
 密码：<input type="password" name="password"/> <br>
 <input type="submit" value="登录" /> <br>
