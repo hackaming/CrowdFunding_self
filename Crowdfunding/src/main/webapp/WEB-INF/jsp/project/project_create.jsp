@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GB18030">
-<title>Insert title here</title>
+<title>创建项目</title>
 </head>
 <body>
 
