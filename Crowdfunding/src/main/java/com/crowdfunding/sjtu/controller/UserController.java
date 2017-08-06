@@ -43,11 +43,14 @@ public class UserController {
 	public String reg(HttpServletRequest req, HttpServletResponse resp) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		//1.把参数接收过来，2.调用SERVICE层，插入DB,3.这里为了简化，先直接调用DAO，但后面需要改正过来。
 		User user = new User();
-		
-		String password1 = req.getParameter("password1");
-		if (!user.getPassword().equals(password1)){
+		if (!req.getParameter("password").equals(req.getParameter("password1"))){
 			return "user/register_failure";
 		}
+		
+		//需要加入判断用户ID是否存在的逻辑，还要思考一个问题，是不是把这些代码都放到服务层？要不然控制层会越来越多，直接调服务层就行了?
+		
+		
+		
 		//Debug user only
 		System.out.println("registration called");
 		user.setUserName(req.getParameter("userName"));
