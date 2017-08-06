@@ -113,6 +113,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public User getUserByName(String userName) {
 		Query query = sessionfactory.getCurrentSession().createQuery("from User u where u.userName =:userName");
+		query.setString("userName", userName);
 		List<User> ulist = query.list();
 		if (ulist.size() > 0) {
 			return ulist.get(0);

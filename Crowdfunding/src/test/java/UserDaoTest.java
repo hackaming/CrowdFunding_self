@@ -17,7 +17,7 @@ public class UserDaoTest {
 		SessionFactory sessionfactory = (SessionFactory) context.getBean("sessionFactory");
 		UserDaoImpl userDao= new UserDaoImpl(sessionfactory);
 		User u = new User();
-		u.setCreatDate(DateServiceImpl.SDF_YYYYMMDDHHMMSS.format(new Date()));
+		u.setCreateDateTime(DateServiceImpl.SDF_YYYYMMDDHHMMSS.format(new Date()));
 		try {
 			u.setPassword(MD5Util.MD5Encrypt("password"));
 		} catch (NoSuchAlgorithmException e) {
