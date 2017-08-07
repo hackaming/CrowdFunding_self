@@ -40,6 +40,8 @@ public class UserController {
 	
 	@RequestMapping(value="/user/log",method = RequestMethod.POST)
 	public String login1(HttpServletRequest req){
+		
+		//这种获取数据的方法有问题，查一下文档，顺便把这些接口也搞清楚，可能是个知识盲点，所有的地方都要修改。
 		String userName = (String) req.getAttribute("userName");
 		String password = (String) req.getAttribute("password");
 		
