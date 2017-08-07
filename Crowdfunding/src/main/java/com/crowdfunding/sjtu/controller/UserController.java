@@ -30,7 +30,7 @@ public class UserController {
 	
 	@RequestMapping("/index")
 	public String getHome(){
-		return "project/projec_tlist";
+		return "project/project_list";
 	}
 	
 	@RequestMapping("/login")
@@ -40,8 +40,10 @@ public class UserController {
 	
 	@RequestMapping(value="/user/log",method = RequestMethod.POST)
 	public String login1(HttpServletRequest req){
-		String userName = req.getParameter("userName");
-		String password = req.getParameter("password");
+		String userName = (String) req.getAttribute("userName");
+		String password = (String) req.getAttribute("password");
+		
+		System.out.println("userName get from login.jsp is:"+userName);
 		//org.hibernate.QueryException: Not all named parameters have been set: [userName] [from User u where u.userName =:userName]
 		//这个地方有BUG，暂时不知道什么原因，无法登录，报SQU QUERY ERROR，先放这里吧。
 		if ( !userServie.login(userName, password) ){
@@ -49,7 +51,10 @@ public class UserController {
 			return "user/login_failure";
 		} else {
 			//login successfully
-			return "user/login_success";			
+			//还需要把用户登录成功的数据放到session里面,转项目列表
+			//待完成
+			//后转项目列表页面
+			return "/projectlist";			
 		}
 	}
 	
@@ -63,9 +68,6 @@ public class UserController {
 		}
 		
 		//需要加入判断用户ID是否存在的逻辑，还要思考一个问题，是不是把这些代码都放到服务层？要不然控制层会越来越多，直接调服务层就行了?
-		
-		
-		
 		//Debug user only
 		System.out.println("registration called");
 		user.setUserName(req.getParameter("userName"));

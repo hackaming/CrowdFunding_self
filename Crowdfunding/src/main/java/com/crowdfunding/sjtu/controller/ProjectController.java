@@ -1,11 +1,15 @@
 package com.crowdfunding.sjtu.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -50,5 +54,20 @@ public class ProjectController {
 		return  "project/create_failure";
 		}
 	}
-
+	
+	@RequestMapping("/projectlist")
+	public String getProjectList(ModelMap model){
+		//这里要读出所有的projects放到列表里面，然后设置到属性里面，
+		//在jsp页面里面要读出来从
+		List<Project> projectlist = projectService.getProjectList();
+		model.addAttribute("projectlist", projectlist);
+		return "project/project_list";
+	}
+	//这是查看单个项目的详细信息，这里要详细介绍
+	@RequestMapping(value="/project/projectdetail/{projectId}", method=RequestMethod.GET)
+	public String getProjectlst(@PathVariable(value="projectId") int projectId,ModelMap modelmap){
+		Project project = projectService.getProjectById(projectId);
+		modelmap.addAttribute("project", project);
+		return "project/project_detail";
+	}
 }

@@ -87,8 +87,11 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public boolean login(String userName, String password) {
 		User u = this.getUserByName(userName);
+		//System.out.println("The user name's:"+u.getUserName()+"The user password is:" + u.getPassword());
+		//System.out.println("The encrypted password is:" + MD5Util.MD5Encrypt(password));
 		if (null != u) {
 			try {
+				//debug use only
 				return u.getPassword().equals(MD5Util.MD5Encrypt(password));
 			} catch (NoSuchAlgorithmException e) {
 				// TODO Auto-generated catch block
@@ -117,6 +120,7 @@ public class UserDaoImpl implements IUserDao {
 		if (ulist.size() > 0) {
 			return ulist.get(0);
 		} else {
+			System.out.println(userName+" user can't find in db");
 			return null;
 		}
 	}

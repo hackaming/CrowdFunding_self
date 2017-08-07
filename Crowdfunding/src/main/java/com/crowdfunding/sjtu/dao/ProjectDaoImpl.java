@@ -19,7 +19,7 @@ public class ProjectDaoImpl implements IProjectDao {
 	@Override
 	public Project getProjectById(Integer projectId) {
 		// TODO Auto-generated method stub
-		Query query = sessionfactory.getCurrentSession().createQuery("from project p where p.projectId =:projectId");
+		Query query = sessionfactory.getCurrentSession().createQuery("from Project p where p.projectId =:projectId");
 		query.setInteger("projectId", projectId);
 		List<Project> projects = (List<Project>) query.list();
 		
@@ -34,7 +34,7 @@ public class ProjectDaoImpl implements IProjectDao {
 	public List<Project> getProjectList() {
 		// TODO Auto-generated method stub
 		
-		return sessionfactory.getCurrentSession().createQuery("from project").list();
+		return sessionfactory.getCurrentSession().createQuery("from Project").list();
 	}
 
 	@Override
