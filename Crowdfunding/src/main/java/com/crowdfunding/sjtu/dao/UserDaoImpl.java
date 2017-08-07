@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.crowdfunding.sjtu.model.User;
 import com.crowdfunding.sjtu.utility.MD5Util;
 
-@Transactional
 @Repository
 public class UserDaoImpl implements IUserDao {
 	/**

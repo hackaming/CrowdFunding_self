@@ -10,6 +10,10 @@ System.out.println("request.getServerPort():"+request.getServerPort());
 String basePath = request.getScheme()+"://" +request.getServerName()+":" +request.getServerPort()+path+"/" ;   
 System.out.println("the basePath is:"+basePath);
 %>   
+<%
+    String ctx = request.getContextPath();
+    pageContext.setAttribute("ctx", ctx);
+%>
 <base href="<%=basePath%>" > 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,7 +24,7 @@ System.out.println("the basePath is:"+basePath);
 </head>
 <body>
 
-<form name="registration" action="/Crowdfunding/user/reg" method="post">
+<form name="registration" action="${ctx }/user/reg" method="post">
 用户名：<input type="text" name = "userName" /><br>
 密码：<input type="text" name = "password" /><br>
 确认密码：<input type="text" name = "password1" /><br>

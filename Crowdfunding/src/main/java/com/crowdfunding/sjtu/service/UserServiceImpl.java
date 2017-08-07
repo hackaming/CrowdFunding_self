@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.crowdfunding.sjtu.dao.IUserDao;
 import com.crowdfunding.sjtu.dao.UserDaoImpl;
 import com.crowdfunding.sjtu.model.User;
 
+@Transactional
 @Service
 public class UserServiceImpl implements IUserService{
 	//2017/8/5 目前是直接调用

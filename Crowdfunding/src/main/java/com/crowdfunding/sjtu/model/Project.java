@@ -15,7 +15,7 @@ public class Project {
 	private String imageName;
 	private String location;
 	private String deadDate;
-	private float price;
+	private String price;
 	private String comment;
 	/**
 	 * @return the projectId
@@ -116,13 +116,13 @@ public class Project {
 	/**
 	 * @return the price
 	 */
-	public float getPrice() {
+	public String getPrice() {
 		return price;
 	}
 	/**
 	 * @param price the price to set
 	 */
-	public void setPrice(float price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	/**

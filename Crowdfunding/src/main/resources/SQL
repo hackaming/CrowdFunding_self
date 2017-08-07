@@ -25,3 +25,6 @@ Price float,
 Comment varchar(50),
 primary key(ProjectId)
 );
+更改price到String省去了转字符格式的过程
+alter table project modify price varchar(10);
+

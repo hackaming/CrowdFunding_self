@@ -6,8 +6,10 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.crowdfunding.sjtu.model.Project;
+
 
 @Repository
 public class ProjectDaoImpl implements IProjectDao {
@@ -49,7 +51,7 @@ public class ProjectDaoImpl implements IProjectDao {
 
 	@Override
 	public Project getProjectByName(String projectName) {
-		Query query = sessionfactory.getCurrentSession().createQuery("from project p where p.projectName =:projectName");
+		Query query = sessionfactory.getCurrentSession().createQuery("from Project p where p.projectName =:projectName");
 		query.setString("projectName", projectName);
 		List<Project> projects = (List<Project>) query.list();
 		if (projects.size()>0){
