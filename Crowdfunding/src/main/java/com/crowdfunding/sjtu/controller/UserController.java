@@ -41,21 +41,21 @@ public class UserController {
 	@RequestMapping(value="/user/log",method = RequestMethod.POST)
 	public String login1(HttpServletRequest req){
 		
-		//这种获取数据的方法有问题，查一下文档，顺便把这些接口也搞清楚，可能是个知识盲点，所有的地方都要修改。
+		//杩欑鑾峰彇鏁版嵁鐨勬柟娉曟湁闂锛屾煡涓�涓嬫枃妗ｏ紝椤轰究鎶婅繖浜涙帴鍙ｄ篃鎼炴竻妤氾紝鍙兘鏄釜鐭ヨ瘑鐩茬偣锛屾墍鏈夌殑鍦版柟閮借淇敼銆�
 		String userName = (String) req.getAttribute("userName");
 		String password = (String) req.getAttribute("password");
 		
 		System.out.println("userName get from login.jsp is:"+userName);
 		//org.hibernate.QueryException: Not all named parameters have been set: [userName] [from User u where u.userName =:userName]
-		//这个地方有BUG，暂时不知道什么原因，无法登录，报SQU QUERY ERROR，先放这里吧。
+		//杩欎釜鍦版柟鏈塀UG锛屾殏鏃朵笉鐭ラ亾浠�涔堝師鍥狅紝鏃犳硶鐧诲綍锛屾姤SQU QUERY ERROR锛屽厛鏀捐繖閲屽惂銆�
 		if ( !userServie.login(userName, password) ){
 			//login failure
 			return "user/login_failure";
 		} else {
 			//login successfully
-			//还需要把用户登录成功的数据放到session里面,转项目列表
-			//待完成
-			//后转项目列表页面
+			//杩橀渶瑕佹妸鐢ㄦ埛鐧诲綍鎴愬姛鐨勬暟鎹斁鍒皊ession閲岄潰,杞」鐩垪琛�
+			//寰呭畬鎴�
+			//鍚庤浆椤圭洰鍒楄〃椤甸潰
 			return "/projectlist";			
 		}
 	}
@@ -63,20 +63,20 @@ public class UserController {
 	//get the parameters and save it into db and then return a succ/failure page to the user
 	@RequestMapping(value="/user/reg",method = RequestMethod.POST)
 	public String reg(HttpServletRequest req, HttpServletResponse resp) throws NoSuchAlgorithmException, UnsupportedEncodingException{
-		//1.把参数接收过来，2.调用SERVICE层，插入DB,3.这里为了简化，先直接调用DAO，但后面需要改正过来。
+		//1.鎶婂弬鏁版帴鏀惰繃鏉ワ紝2.璋冪敤SERVICE灞傦紝鎻掑叆DB,3.杩欓噷涓轰簡绠�鍖栵紝鍏堢洿鎺ヨ皟鐢―AO锛屼絾鍚庨潰闇�瑕佹敼姝ｈ繃鏉ャ��
 		User user = new User();
 		if (!req.getParameter("password").equals(req.getParameter("password1"))){
 			return "user/register_failure";
 		}
 		
-		//需要加入判断用户ID是否存在的逻辑，还要思考一个问题，是不是把这些代码都放到服务层？要不然控制层会越来越多，直接调服务层就行了?
+		//闇�瑕佸姞鍏ュ垽鏂敤鎴稩D鏄惁瀛樺湪鐨勯�昏緫锛岃繕瑕佹�濊�冧竴涓棶棰橈紝鏄笉鏄妸杩欎簺浠ｇ爜閮芥斁鍒版湇鍔″眰锛熻涓嶇劧鎺у埗灞備細瓒婃潵瓒婂锛岀洿鎺ヨ皟鏈嶅姟灞傚氨琛屼簡?
 		//Debug user only
 		System.out.println("registration called");
 		user.setUserName(req.getParameter("userName"));
 		user.setPassword(MD5Util.MD5Encrypt(req.getParameter("password")));
 		user.setSex(req.getParameter("sex"));
 		user.setCellPhone(req.getParameter("cellPhone"));
-		//还需要设置DATETIME, STATUS
+		//杩橀渶瑕佽缃瓺ATETIME, STATUS
 		user.setCreateDateTime(dateService.getStandardDate());
 		userServie.saveUser(user);
 		return "user/register_success";
