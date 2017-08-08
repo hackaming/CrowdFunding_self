@@ -10,8 +10,10 @@ public class Orders {
 	private int orderId;
 	private String createDateTime;
 	private int projectId;
-	private String totalAmount;
+	private int userId;
+	private Float totalAmount;
 	private int status;
+	private int shares;
 	private String comment;
 	/**
 	 * @return the orderId
@@ -52,13 +54,13 @@ public class Orders {
 	/**
 	 * @return the totalAmount
 	 */
-	public String getTotalAmount() {
+	public Float getTotalAmount() {
 		return totalAmount;
 	}
 	/**
 	 * @param totalAmount the totalAmount to set
 	 */
-	public void setTotalAmount(String totalAmount) {
+	public void setTotalAmount(Float totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 	/**
@@ -78,6 +80,30 @@ public class Orders {
 	 */
 	public String getComment() {
 		return comment;
+	}
+	/**
+	 * @return the userId
+	 */
+	public int getUserId() {
+		return userId;
+	}
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	/**
+	 * @return the shares
+	 */
+	public int getShares() {
+		return shares;
+	}
+	/**
+	 * @param shares the shares to set
+	 */
+	public void setShares(int shares) {
+		this.shares = shares;
 	}
 	/**
 	 * @param comment the comment to set

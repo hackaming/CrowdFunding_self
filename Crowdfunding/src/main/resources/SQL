@@ -38,3 +38,7 @@ alter table project modify price varchar(10);
  Comment varchar(250),
  primary key (OrderId)
  );
+ 改一下表结构
+ alter table orders modify TotalAmount float;
+ alter table orders add column shares int;
+  alter table orders add column userid int;

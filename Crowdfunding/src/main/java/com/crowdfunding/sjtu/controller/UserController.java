@@ -50,7 +50,7 @@ public class UserController {
 		//System.out.println("userName get from login.jsp by getParameter is:"+userName1);
 		//org.hibernate.QueryException: Not all named parameters have been set: [userName] [from User u where u.userName =:userName]
 		//鏉╂瑤閲滈崷鐗堟煙閺堝UG閿涘本娈忛弮鏈电瑝閻儵浜炬禒锟芥稊鍫濆斧閸ョ媴绱濋弮鐘崇《閻ц缍嶉敍灞惧ГSQU QUERY ERROR閿涘苯鍘涢弨鎹愮箹闁插苯鎯傞妴锟�
-		User u = userServie.getUserByName(userName);		
+		User u = userServie.getUserByName(userName);	
 		if ( !userServie.login(userName, password) ){ //此处要改。。。。不需要再登录了，已经取了一次了USER了访问了db了
 			//login failure
 			return "user/login_failure";
@@ -60,6 +60,8 @@ public class UserController {
 			//瀵板懎鐣幋锟�
 			//閸氬氦娴嗘い鍦窗閸掓銆冩い鐢告桨
 			//return "redirect:/projectlist";			//also works
+			System.out.println("user id is"+u.getUserId());
+			System.out.println("user name is"+u.getUserName() + "now set it into session");
 			session.setAttribute("user", u);   //登录成功，将user存到session
 			return "forward:/projectlist";
 		}
