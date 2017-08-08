@@ -16,6 +16,7 @@
 //从 modelmap的变量，projectlist里面逐个的把数据读出来。
 <form>
 <c:forEach items="${projectlist }" var="project" varStatus="p">
+<form name="" action="" method="get">
 <a href="${ctx}/project/projectdetail/${project.projectId }">项目名称:"${project.projectName }"</a><br>
 项目ID:"${project.projectId }" <br>
 项目创建日期："${project.createDateTime }" <br>
@@ -24,8 +25,10 @@
 项目地址:"${project.location }" <br>
 项目价格:"${project.price }" <br>
 项目状态:"${project.status }" <br>
-
-
+<input type = "submit" value="参与众筹" />
+</form>
+<br>
+<br>
 </c:forEach>
 </form>
 
