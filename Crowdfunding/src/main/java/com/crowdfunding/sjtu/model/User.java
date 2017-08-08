@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+//注意，那些一对一，一对多的还没配置
 @Entity
 @Table(name = "User")
 public class User{

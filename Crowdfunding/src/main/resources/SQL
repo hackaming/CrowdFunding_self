@@ -25,6 +25,16 @@ Price float,
 Comment varchar(50),
 primary key(ProjectId)
 );
-更改price到String省去了转字符格式的过程
+锟斤拷锟斤拷price锟斤拷String省去锟斤拷转锟街凤拷锟斤拷式锟侥癸拷锟斤拷
 alter table project modify price varchar(10);
 
+鐢ㄦ埛璁㈠崟琛細
+ create table orders(
+ OrderId int auto_increment,
+ CreateDateTime varchar(30),
+ ProjectId int,
+ TotalAmount varchar(20),
+ Status int unsigned,
+ Comment varchar(250),
+ primary key (OrderId)
+ );
