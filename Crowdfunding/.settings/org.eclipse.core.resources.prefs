@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/crowdfunding/sjtu/controller=UTF-8
+encoding//src/main/java/com/crowdfunding/sjtu/controller/ProjectController.java=GBK
 encoding//src/main/java/com/crowdfunding/sjtu/controller/UserController.java=UTF-8
-encoding/<project>=GBK
+encoding/<project>=UTF-8
