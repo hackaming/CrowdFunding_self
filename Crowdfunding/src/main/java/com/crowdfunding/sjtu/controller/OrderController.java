@@ -3,6 +3,7 @@ package com.crowdfunding.sjtu.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,7 +29,7 @@ public class OrderController {
 	private IDateService dateservice;
 	@Autowired
 	private IOrderService orderservice;
-	
+	Logger logger = Logger.getLogger(this.getClass());
 	@RequestMapping(value="/orderstart")
 	public String orderStart(String projectid,HttpServletRequest req,ModelMap model){
 //projectID取不到值还要调试，查一下
