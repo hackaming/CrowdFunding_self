@@ -12,12 +12,21 @@
 </head>
 <body>
 <!-- 开始确认订单之后后，更新订单状态为已确认，然后啥？跳转支付了，终于到支付了 -->
-<form name="pay" action="${ctx }/order/confirmed" method="post">
-请确认您的订单：
-订单号:${order.orderId }
-项目id:${order.projectId }
-您需要支付:${order.totalAmount }
-份数：${order.shares }
+<form name="pay" action=""${ctx }"/order/confirmed" method="post">
+请确认您的订单：<br>
+订单号:"${order.orderId }"<br>
+项目id:"${order.projectId }"<br>
+您需要支付:"${order.totalAmount }"<br>
+份数："${order.shares }"<br>
+
+<input type="hidden" name="projectId" value="${project.projectId }"/><br>
+<input type="hidden" name="orderId" value="${project.orderId }"/><br>
+<input type="hidden" name="totalAmount" value="${project.totalAmount }"/><br>
+<input type="hidden" name="shares" value="${project.shares }"/><br>
+<input type="hidden" name="status" value="${project.status }"/><br>
+<input type="hidden" name="comment" value="${project.comment }"/><br>
+<input type="hidden" name="createDateTime" value="${project.createDateTime }"/><br>
+
 <input type="submit" value="确认支付" />
 </form>
 </body>
