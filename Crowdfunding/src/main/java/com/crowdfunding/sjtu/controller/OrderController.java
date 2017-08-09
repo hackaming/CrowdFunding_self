@@ -58,8 +58,6 @@ public class OrderController {
 		} else{
 			return "user/login";
 		}
-		
-		
 		Project project = projectservice.getProjectById(Integer.parseInt(projectId));
 		Orders order = new Orders();
 		order.setProjectId(project.getProjectId());
@@ -75,5 +73,17 @@ public class OrderController {
 		System.out.println("The orderId is:"+order.getOrderId());
 		model.addAttribute("order", order);
 		return "orders/order_confirm";
+	}
+	
+	//用户确认订单正确，并且要跳转支付的时候，需要更新一下ORDER里面的这条记录的状态为，确认，并跳转支付。
+	//更新状态的逻辑在这里写吧，更新完之后，应该是转到PAY里面
+	@RequestMapping("/order/confirmed")
+	public String orderConfirmed(Orders order){
+		//System.out.println("Test to see if the order can be get in this way:"+order.getOrderId());
+		order.setStatus(1);
+		order.setComment("now the user confirmed he/she needs to pay,time is:" + dateservice.getFullDate());
+		orderservice.saveOrUpdate(order); //update the status, then go to pay...
+		
+		return "forward:/pay/orderpay";
 	}
 }
