@@ -1,5 +1,6 @@
 package com.crowdfunding.sjtu.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -15,9 +16,9 @@ public class OrderDaoImpl implements IOrderDao{
 	
 	
 	@Override
-	public void saveOrder(Orders order) {
+	public Serializable saveOrder(Orders order) {
 		// TODO Auto-generated method stub
-		sessionfactory.getCurrentSession().save(order);
+		return sessionfactory.getCurrentSession().save(order);
 	}
 
 	@Override

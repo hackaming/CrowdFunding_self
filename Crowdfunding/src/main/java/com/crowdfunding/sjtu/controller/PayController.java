@@ -15,10 +15,11 @@ public class PayController {
 	public String orderPay(Orders order,ModelMap modelmap){
 		logger.info("Now begin in /pay/orderpay action!");
 		//这里，填入参数，把ORDER里面的东西接收过来填 到对应的参数里面，调下面的链接连支付宝
-		modelmap.addAttribute("WIDout_trade_no", ""); //订单号
-		modelmap.addAttribute("WIDtotal_amount", ""); //交易金额
-		modelmap.addAttribute("WIDsubject", ""); //订单名称
-		modelmap.addAttribute("WIDbody", ""); //商品描述 可空
-		return "order/start_pay";
+		modelmap.addAttribute("WIDout_trade_no", order.getOrderId()); //订单号
+		modelmap.addAttribute("WIDtotal_amount", order.getTotalAmount()); //交易金额
+		modelmap.addAttribute("WIDsubject", "projectId:" + order.getProjectId()); //订单名称
+		modelmap.addAttribute("WIDbody", "dd"); //商品描述 可空
+		return "alipay/test";
+		//return "orders/order_confirm";
 	}
 }

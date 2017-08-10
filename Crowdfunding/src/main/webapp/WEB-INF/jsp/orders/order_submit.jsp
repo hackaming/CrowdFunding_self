@@ -18,7 +18,7 @@
 项目地址:"${project.location }" <br>
 项目价格:"${project.price }" <br>
 项目状态:"${project.status }" <br>
-<form name="ordersubmit" action="${ctx }/order/ordersubmit" method="post">
+<form name="ordersubmit" action="${ctx}/order/ordersubmit" method="post">
 输入众筹份数<input type="input" name="shares" /><br>
  <input type="hidden" name="projectId" value="${project.projectId }"/><br>
 <input type="submit" value="确认众筹" />

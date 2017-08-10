@@ -17,15 +17,20 @@
 	alipayRequest.setReturnUrl(AlipayConfig.return_url);
 	alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
 	
+	System.out.println("in start_pay.jsp, now start to set the parameters");
 	//商户订单号，商户网站订单系统中唯一订单号，必填
+	
 	String out_trade_no = new String(request.getParameter("WIDout_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+	
+	
+	
 	//付款金额，必填
 	String total_amount = new String(request.getParameter("WIDtotal_amount").getBytes("ISO-8859-1"),"UTF-8");
 	//订单名称，必填
 	String subject = new String(request.getParameter("WIDsubject").getBytes("ISO-8859-1"),"UTF-8");
 	//商品描述，可空
 	String body = new String(request.getParameter("WIDbody").getBytes("ISO-8859-1"),"UTF-8");
-	
+	System.out.println("Now begin to call the setbizcontent");
 	alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\"," 
 			+ "\"total_amount\":\""+ total_amount +"\"," 
 			+ "\"subject\":\""+ subject +"\"," 
@@ -41,10 +46,13 @@
 	//		+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
 	//请求参数可查阅【电脑网站支付的API文档-alipay.trade.page.pay-请求参数】章节
 	
+	System.out.println("Now begin to call the alipayclient to send the request.");
 	//请求
 	String result = alipayClient.pageExecute(alipayRequest).getBody();
 	
+	System.out.println("Now print out the result to the user");
 	//输出
+	//还需要给到交易流水吧？？？？
 	out.println(result);
 %>
 <body>

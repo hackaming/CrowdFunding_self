@@ -1,5 +1,6 @@
 package com.crowdfunding.sjtu.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,9 @@ public class OrderServiceImpl implements IOrderService{
 	private IOrderDao orderdao;
 	
 	@Override
-	public void saveOrder(Orders order) {
+	public Serializable saveOrder(Orders order) {
 		// TODO Auto-generated method stub
-		orderdao.saveOrder(order);
+		return orderdao.saveOrder(order);
 	}
 
 	@Override

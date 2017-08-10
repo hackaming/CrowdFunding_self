@@ -8,24 +8,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>alreadyconfirmed</title>
 </head>
 <body>
 <!-- ¿ªÊ¼È·ÈÏ¶©µ¥Ö®ºóºó£¬¸üÐÂ¶©µ¥×´Ì¬ÎªÒÑÈ·ÈÏ£¬È»ºóÉ¶£¿Ìø×ªÖ§¸¶ÁË£¬ÖÕÓÚµ½Ö§¸¶ÁË -->
-<form name="pay" action=""${ctx }"/order/confirmed" method="post">
+<form name="payalreadyconfirmed" action="${ctx}/order/alreadyconfirmed" method="post">
 ÇëÈ·ÈÏÄúµÄ¶©µ¥£º<br>
 ¶©µ¥ºÅ:"${order.orderId }"<br>
 ÏîÄ¿id:"${order.projectId }"<br>
 ÄúÐèÒªÖ§¸¶:"${order.totalAmount }"<br>
 ·ÝÊý£º"${order.shares }"<br>
 
-<input type="hidden" name="projectId" value="${project.projectId }"/><br>
-<input type="hidden" name="orderId" value="${project.orderId }"/><br>
-<input type="hidden" name="totalAmount" value="${project.totalAmount }"/><br>
-<input type="hidden" name="shares" value="${project.shares }"/><br>
-<input type="hidden" name="status" value="${project.status }"/><br>
-<input type="hidden" name="comment" value="${project.comment }"/><br>
-<input type="hidden" name="createDateTime" value="${project.createDateTime }"/><br>
+<input type="hidden" name="projectId" value="${order.projectId }"/><br>
+<input type="hidden" name="orderId" value="${order.orderId }"/><br>
+<input type="hidden" name="totalAmount" value="${order.totalAmount }"/><br>
+<input type="hidden" name="shares" value="${order.shares }"/><br>
+<input type="hidden" name="status" value="${order.status }"/><br>
+<input type="hidden" name="comment" value="${order.comment }"/><br>
+<input type="hidden" name="createDateTime" value="${order.createDateTime }"/><br>
 
 <input type="submit" value="È·ÈÏÖ§¸¶" />
 </form>

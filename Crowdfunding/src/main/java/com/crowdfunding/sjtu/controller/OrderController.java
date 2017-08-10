@@ -67,9 +67,10 @@ public class OrderController {
 		order.setTotalAmount(totalAmount);
 		order.setStatus(0); //0 is the initial status, not confirm by user
 		order.setComment("0 is theinitial status, not confirmed by user");
-		orderservice.saveOrder(order);
+		int id = (Integer) orderservice.saveOrder(order);
 		//如何将数据从DB里读出来？刚刚那条记录，并显示出来给用户确认，是一个问题。ORDER ID?
 		//Orders confirmOrder = orderservice.getOrderById(orderId) ;
+		System.out.println("The orderId is from (id):"+id);
 		System.out.println("The orderId is:"+order.getOrderId());
 		model.addAttribute("order", order);
 		return "orders/order_confirm";
@@ -77,12 +78,12 @@ public class OrderController {
 	
 	//用户确认订单正确，并且要跳转支付的时候，需要更新一下ORDER里面的这条记录的状态为，确认，并跳转支付。
 	//更新状态的逻辑在这里写吧，更新完之后，应该是转到PAY里面
-	@RequestMapping("/order/confirmed")
+	@RequestMapping("/order/alreadyconfirmed")
 	public String orderConfirmed(Orders order){
 		//System.out.println("Test to see if the order can be get in this way:"+order.getOrderId());
 		order.setStatus(1);
 		order.setComment("now the user confirmed he/she needs to pay,time is:" + dateservice.getFullDate());
-		logger.info("begin to save into db with the new status");
+		System.out.println("begin to save into db with the new status");
 		orderservice.saveOrUpdate(order); //update the status, then go to pay...
 		logger.info("now the user confirmed he/she needs to pay,time is:" + dateservice.getFullDate()+"order id is:" + order.getOrderId());
 		
