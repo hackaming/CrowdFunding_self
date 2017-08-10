@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ public class UserController {
 	public IDateService dateService;
 	@Autowired
 	public IUserService userServie;
+	Logger logger = Logger.getLogger(this.getClass());
+	
 	@RequestMapping("/")
 	public String getHome1(){
 		return getHome();
@@ -95,6 +98,7 @@ public class UserController {
 		//鏉╂﹢娓剁憰浣筋啎缂冪摵ATETIME, STATUS
 		user.setCreateDateTime(dateService.getStandardDate());
 		userServie.saveUser(user);
+		logger.info("user's saved");
 		return "user/register_success";
 	}
 	

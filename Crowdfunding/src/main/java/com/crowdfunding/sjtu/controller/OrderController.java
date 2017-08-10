@@ -3,6 +3,7 @@ package com.crowdfunding.sjtu.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,7 +29,7 @@ public class OrderController {
 	private IDateService dateservice;
 	@Autowired
 	private IOrderService orderservice;
-	
+	Logger logger = Logger.getLogger(this.getClass());
 	@RequestMapping(value="/orderstart")
 	public String orderStart(String projectid,HttpServletRequest req,ModelMap model){
 //projectID取不到值还要调试，查一下
@@ -81,7 +82,9 @@ public class OrderController {
 		//System.out.println("Test to see if the order can be get in this way:"+order.getOrderId());
 		order.setStatus(1);
 		order.setComment("now the user confirmed he/she needs to pay,time is:" + dateservice.getFullDate());
+		logger.info("begin to save into db with the new status");
 		orderservice.saveOrUpdate(order); //update the status, then go to pay...
+		logger.info("now the user confirmed he/she needs to pay,time is:" + dateservice.getFullDate()+"order id is:" + order.getOrderId());
 		
 		return "forward:/pay/orderpay";
 	}
