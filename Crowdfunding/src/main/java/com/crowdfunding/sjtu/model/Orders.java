@@ -1,12 +1,15 @@
 package com.crowdfunding.sjtu.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 //注意，那些一对一，一对多的还没配置，跟用户和项目表都有关联
 @Entity
 public class Orders {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int orderId;
 	private String createDateTime;
 	private int projectId;

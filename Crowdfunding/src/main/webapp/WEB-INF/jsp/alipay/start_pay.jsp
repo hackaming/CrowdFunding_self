@@ -19,31 +19,31 @@
 	
 	System.out.println("in start_pay.jsp, now start to set the parameters");
 	//商户订单号，商户网站订单系统中唯一订单号，必填
-/* 	String str2 =request.getAttribute("WIDout_trade_no").toString();
-	String out_trade_no = new String(str2.getBytes("ISO-8859-1"),"UTF-8"); */
+ 	String str2 =request.getAttribute("WIDout_trade_no").toString();
+	String out_trade_no = new String(str2.getBytes("ISO-8859-1"),"UTF-8"); 
 	
 	
-	String out_trade_no = new String(request.getParameter("WIDout_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+	//String out_trade_no = new String(request.getParameter("WIDout_trade_no").getBytes("ISO-8859-1"),"UTF-8");
 	
 	
 	
 	//付款金额，必填
-	String total_amount = new String(request.getParameter("WIDtotal_amount").getBytes("ISO-8859-1"),"UTF-8");
+	//String total_amount = new String(request.getParameter("WIDtotal_amount").getBytes("ISO-8859-1"),"UTF-8");
 	
-	/* str2 =request.getAttribute("WIDtotal_amount").toString();
-	String total_amount = new String(str2.getBytes("ISO-8859-1"),"UTF-8"); */
+	 str2 =request.getAttribute("WIDtotal_amount").toString();
+	String total_amount = new String(str2.getBytes("ISO-8859-1"),"UTF-8"); 
 	
 	//订单名称，必填
-	String subject = new String(request.getParameter("WIDsubject").getBytes("ISO-8859-1"),"UTF-8");
-	/* str2 =request.getAttribute("WIDsubject").toString();
-	String subject = new String(str2.getBytes("ISO-8859-1"),"UTF-8"); */
+	//String subject = new String(request.getParameter("WIDsubject").getBytes("ISO-8859-1"),"UTF-8");
+	 str2 =request.getAttribute("WIDsubject").toString();
+	String subject = new String(str2.getBytes("ISO-8859-1"),"UTF-8"); 
 	
 	
 	//商品描述，可空
-	String body = new String(request.getParameter("WIDbody").getBytes("ISO-8859-1"),"UTF-8");
-	/* 
+	//String body = new String(request.getParameter("WIDbody").getBytes("ISO-8859-1"),"UTF-8");
+	 
 	str2 =request.getAttribute("WIDbody").toString();
-	String body = new String(str2.getBytes("ISO-8859-1"),"UTF-8"); */
+	String body = new String(str2.getBytes("ISO-8859-1"),"UTF-8"); 
 	
 	System.out.println("Now begin to call the setbizcontent");
 	alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\"," 

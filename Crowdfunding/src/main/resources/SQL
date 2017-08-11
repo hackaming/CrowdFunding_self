@@ -42,3 +42,20 @@ alter table project modify price varchar(10);
  alter table orders modify TotalAmount float;
  alter table orders add column shares int;
   alter table orders add column userid int;
+  
+交易流水表
+  create table JournalTractional(
+JournalTractionalId int auto_increment,
+WIDout_trade_no varchar(20),
+WIDtotal_amount varchar(20),
+WIDsubject varchar(50),
+WIDbody varchar(50),
+DateTime varchar(30),
+Status int,
+Comment varchar(50),
+primary key (JournalTractionalId)
+);
+
+alter table JournalTractional add column out_trade_no varchar(50);
+alter table JournalTractional add column trade_no varchar(50);
+alter table JournalTractional add column trade_status varchar(8);

@@ -18,6 +18,10 @@ public class OrderDaoImpl implements IOrderDao{
 	@Override
 	public Serializable saveOrder(Orders order) {
 		// TODO Auto-generated method stub
+/*		int pk =(Integer) sessionfactory.getCurrentSession().save(order);
+		System.out.println("the pk value's ID returned??:" + pk);
+		return pk;
+		*/
 		return sessionfactory.getCurrentSession().save(order);
 	}
 
@@ -50,6 +54,12 @@ public class OrderDaoImpl implements IOrderDao{
 	public void deleteOrder(int orderId) {
 		// TODO Auto-generated method stub
 		sessionfactory.getCurrentSession().delete(orderId);
+	}
+
+	@SuppressWarnings("deprecation")
+	public Orders saveorupdatecopy(Orders order) {
+		// TODO Auto-generated method stub
+		return order;
 	}
 
 }

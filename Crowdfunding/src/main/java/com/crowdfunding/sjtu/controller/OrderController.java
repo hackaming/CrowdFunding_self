@@ -67,10 +67,14 @@ public class OrderController {
 		order.setTotalAmount(totalAmount);
 		order.setStatus(0); //0 is the initial status, not confirm by user
 		order.setComment("0 is theinitial status, not confirmed by user");
-		int id = (Integer) orderservice.saveOrder(order);
+		orderservice.saveOrder(order);
+		System.out.println("id is:" + order.getOrderId());
+		
+		//order = orderservice.saveorupdatecopy(order);
+		
 		//如何将数据从DB里读出来？刚刚那条记录，并显示出来给用户确认，是一个问题。ORDER ID?
 		//Orders confirmOrder = orderservice.getOrderById(orderId) ;
-		System.out.println("The orderId is from (id):"+id);
+		//System.out.println("The orderId is from (id):"+id);
 		System.out.println("The orderId is:"+order.getOrderId());
 		model.addAttribute("order", order);
 		return "orders/order_confirm";

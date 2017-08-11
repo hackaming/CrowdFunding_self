@@ -20,6 +20,7 @@ public class OrderServiceImpl implements IOrderService{
 	public Serializable saveOrder(Orders order) {
 		// TODO Auto-generated method stub
 		return orderdao.saveOrder(order);
+		
 	}
 
 	@Override
@@ -44,6 +45,12 @@ public class OrderServiceImpl implements IOrderService{
 	public void deleteOrder(int orderId) {
 		// TODO Auto-generated method stub
 		orderdao.deleteOrder(orderId);
+	}
+
+	@Override
+	public Orders saveorupdatecopy(Orders order) {
+		// TODO Auto-generated method stub
+		return orderdao.saveorupdatecopy(order);
 	}
 
 }

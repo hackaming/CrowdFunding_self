@@ -57,7 +57,9 @@
 		out.println("验签失败");
 	}
 	//——请在这里编写您的程序（以上代码仅作参考）——
+	System.out.println("同步调用页面，JSP CODE");
 %>
+同步调用页面，JSP CODE，显示什么呢？
 <body>
 </body>
 </html>

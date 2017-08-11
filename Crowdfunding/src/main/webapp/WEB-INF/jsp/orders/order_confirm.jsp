@@ -19,10 +19,10 @@
 您需要支付:"${order.totalAmount }"<br>
 份数："${order.shares }"<br>
 
-<input type="hidden" name="projectId" value="${order.projectId }"/><br>
-<input type="hidden" name="orderId" value="${order.orderId }"/><br>
-<input type="hidden" name="totalAmount" value="${order.totalAmount }"/><br>
-<input type="hidden" name="shares" value="${order.shares }"/><br>
+<input type="hidden" name="WIDsubject" value="Project${order.projectId }"/><br>
+<input type="hidden" name="WIDout_trade_no" value="${order.orderId }"/><br>
+<input type="hidden" name="WIDtotal_amount" value="${order.totalAmount }"/><br>
+<input type="hidden" name="WIDbody" value="Shares${order.shares }"/><br>
 <input type="hidden" name="status" value="${order.status }"/><br>
 <input type="hidden" name="comment" value="${order.comment }"/><br>
 <input type="hidden" name="createDateTime" value="${order.createDateTime }"/><br>
