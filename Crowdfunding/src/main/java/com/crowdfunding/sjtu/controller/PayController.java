@@ -1,6 +1,7 @@
 package com.crowdfunding.sjtu.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.servlet.http.HttpServletRequest;
@@ -85,7 +86,7 @@ public class PayController {
 		 
 		/*str2 =request.getAttribute("WIDbody").toString();
 		String body = new String(str2.getBytes("ISO-8859-1"),"UTF-8"); */
-		
+		System.out.println(out_trade_no + total_amount + subject +body);
 		System.out.println("Now begin to call the setbizcontent");
 		alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\"," 
 				+ "\"total_amount\":\""+ total_amount +"\"," 
@@ -119,8 +120,14 @@ public class PayController {
 		System.out.println("Now print out the result to the user");
 		//输出
 		//还需要给到交易流水吧？？？？
-		resp.getWriter().println(result);
+/*		PrintWriter out = resp.getWriter();
+		out.println(result);
+		resp.*/
+		resp.setContentType("text/html;charset=UTF-8");
+		resp.getWriter().print(result);
+		//resp.getWriter().p
 		//out.println(result);
 	}
 	
 }
+

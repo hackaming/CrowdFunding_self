@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
@@ -51,6 +52,7 @@ public class BackPayController {
 			//获取支付宝POST过来反馈信息
 			Map<String,String> params = new HashMap<String,String>();
 			Map<String,String[]> requestParams = request.getParameterMap();
+			System.out.println("BackPayController is called!");
 			for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
 				String name = (String) iter.next();
 				String[] values = (String[]) requestParams.get(name);
@@ -121,5 +123,10 @@ public class BackPayController {
 			}
 			
 			//——请在这里编写您的程序（以上代码仅作参考）——
+	}
+	@RequestMapping(value="/alipay/return")
+	public String returnUrl(){
+		System.out.println("return_url is called(page)");
+	return "forward:/alipay/return_url";	
 	}
 }
