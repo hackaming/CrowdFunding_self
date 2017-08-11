@@ -34,7 +34,7 @@ public class AlipayConfig {
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
 	//把家里的TOMCAT配起来，让外网可以访问
-	public static String return_url = "http://127.0.0.1/crowdfunding/alipay/return_url.jsp";
+	public static String return_url = "http://180.171.41.183/crowdfunding/alipay/return_url.jsp";
 
 	// 签名方式
 	public static String sign_type = "RSA2";

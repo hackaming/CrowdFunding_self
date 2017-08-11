@@ -8,5 +8,6 @@
 		<mapping class="com.crowdfunding.sjtu.model.User" />
 		<mapping class="com.crowdfunding.sjtu.model.Project" />
 		<mapping class="com.crowdfunding.sjtu.model.Orders" />
+		<mapping class="com.crowdfunding.sjtu.model.JournalTractional" />
  	</session-factory>
 </hibernate-configuration>
