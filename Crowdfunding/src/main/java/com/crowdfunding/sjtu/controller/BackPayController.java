@@ -125,7 +125,7 @@ public class BackPayController {
 			//——请在这里编写您的程序（以上代码仅作参考）——
 	}
 	@RequestMapping(value="/alipay/return")
-	public String returnUrl(){
+	public String returnUrl(String total_amount,String timestamp,String sign,String trade_no,String sign_type,String auth_app_id,String charset,String seller_id,String method,String app_id,String out_trade_no,String version){
 		System.out.println("return_url is called(page)");
 	return "forward:/alipay/return_url";	
 	}
