@@ -60,3 +60,14 @@ alter table JournalTractional add column out_trade_no varchar(50);
 alter table JournalTractional add column trade_no varchar(50);
 alter table JournalTractional add column trade_status varchar(8);
 
+
+Audit table:
+ create table audit (
+ auditId int auto_increment,
+ userId int,
+ projectId int,
+ auditName varchar(50),
+ status int,
+ createDateTime varchar(50),
+ comment varchar(50),
+ primary key(auditId));
