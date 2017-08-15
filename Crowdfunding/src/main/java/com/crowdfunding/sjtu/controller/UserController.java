@@ -2,6 +2,7 @@ package com.crowdfunding.sjtu.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,11 +11,15 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.crowdfunding.sjtu.model.Orders;
 import com.crowdfunding.sjtu.model.User;
+import com.crowdfunding.sjtu.service.IOrderService;
+import com.crowdfunding.sjtu.service.IProjectService;
 import com.crowdfunding.sjtu.service.IUserService;
 import com.crowdfunding.sjtu.utility.IDateService;
 import com.crowdfunding.sjtu.utility.MD5Util;
@@ -23,10 +28,17 @@ import com.crowdfunding.sjtu.utility.MD5Util;
 public class UserController {
 	
 	@Autowired
-	public IDateService dateService;
+	private IDateService dateService;
 	@Autowired
-	public IUserService userServie;
+	private IUserService userServie;
 	Logger logger = Logger.getLogger(this.getClass());
+	
+	@Autowired
+	private IOrderService orderservice;
+	@Autowired
+	private IProjectService projectservice;
+	
+
 	
 	@RequestMapping("/")
 	public String getHome1(){
@@ -106,5 +118,18 @@ public class UserController {
 	@RequestMapping("/register")
 	public String register(){
 		return "user/register";
+	}
+	
+	@RequestMapping("/usercenter")
+	public String userCenter(HttpServletRequest request ,HttpSession session,ModelMap modelmap){
+		User u = (User) session.getAttribute("user");
+		if (null == u){
+			return "user/login";
+		}
+		
+		List<Orders> orders = orderservice.getOrdersByUserId(u.getUserId());
+		
+		modelmap.addAttribute("orders", orders);
+		return "user/user_center";
 	}
 }

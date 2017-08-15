@@ -53,4 +53,10 @@ public class OrderServiceImpl implements IOrderService{
 		return orderdao.saveorupdatecopy(order);
 	}
 
+	@Override
+	public List<Orders> getOrdersByUserId(int userId) {
+		// TODO Auto-generated method stub
+		return orderdao.getOrdersByUserId(userId);
+	}
+
 }

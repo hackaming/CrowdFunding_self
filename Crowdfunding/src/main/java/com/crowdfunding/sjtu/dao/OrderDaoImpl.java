@@ -9,19 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.crowdfunding.sjtu.model.Orders;
+
 @Repository
-public class OrderDaoImpl implements IOrderDao{
+public class OrderDaoImpl implements IOrderDao {
 	@Autowired
 	private SessionFactory sessionfactory;
-	
-	
+
 	@Override
 	public Serializable saveOrder(Orders order) {
 		// TODO Auto-generated method stub
-/*		int pk =(Integer) sessionfactory.getCurrentSession().save(order);
-		System.out.println("the pk value's ID returned??:" + pk);
-		return pk;
-		*/
+		/*
+		 * int pk =(Integer) sessionfactory.getCurrentSession().save(order);
+		 * System.out.println("the pk value's ID returned??:" + pk); return pk;
+		 */
 		return sessionfactory.getCurrentSession().save(order);
 	}
 
@@ -37,7 +37,7 @@ public class OrderDaoImpl implements IOrderDao{
 		Query query = sessionfactory.getCurrentSession().createQuery("from Orders o where o.orderId=:orderId");
 		query.setInteger("orderId", orderId);
 		List<Orders> orders = query.list();
-		if (orders.size()>=1){
+		if (orders.size() >= 1) {
 			return orders.get(0);
 		} else {
 			return null;
@@ -60,6 +60,13 @@ public class OrderDaoImpl implements IOrderDao{
 	public Orders saveorupdatecopy(Orders order) {
 		// TODO Auto-generated method stub
 		return order;
+	}
+
+	@Override
+	public List<Orders> getOrdersByUserId(int userId) {
+		Query query = sessionfactory.getCurrentSession().createQuery("from Orders o where o.userId=:userId");
+		query.setInteger("userId", userId);
+		return query.list();
 	}
 
 }

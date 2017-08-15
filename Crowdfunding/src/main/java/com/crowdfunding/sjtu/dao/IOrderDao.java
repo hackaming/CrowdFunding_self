@@ -12,4 +12,5 @@ public interface IOrderDao {
 	public List<Orders> getOrders();
 	public void deleteOrder(int orderId);
 	public Orders saveorupdatecopy(Orders order);
+	public List<Orders> getOrdersByUserId(int userid);
 }

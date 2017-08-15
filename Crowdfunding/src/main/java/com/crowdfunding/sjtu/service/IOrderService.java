@@ -13,4 +13,5 @@ public interface IOrderService {
 	public List<Orders> getOrders();
 	public void deleteOrder(int orderId);
 	public Orders saveorupdatecopy(Orders order);
+	public List<Orders> getOrdersByUserId(int userId);
 }
