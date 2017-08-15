@@ -26,11 +26,7 @@ pageContext.setAttribute("ctx", ctx);
 ÉóºË×´Ì¬£º"${audits.status}" <br>
 <input type="submit" name="action" value="audit_pass" />
 <input type="submit" name="action" value="audit_fail" />
-
 </form>
 </c:forEach>
-
-
-
 </body>
 </html>

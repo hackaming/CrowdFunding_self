@@ -10,5 +10,8 @@ public interface IAuditDao {
 	public void saveAudit(Audit audit);
 	public void SaveOrUpdateAudit(Audit audit);
 	public Audit findById(int auditId);
+<<<<<<< HEAD
 	public List<Audit> getAuditsByStatus(int status);
+=======
+>>>>>>> f9ac4843a4f79b74a9f53c04b74cbd9d5705ddae
 }
