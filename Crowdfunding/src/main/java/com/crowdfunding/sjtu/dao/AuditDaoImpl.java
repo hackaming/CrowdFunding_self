@@ -53,8 +53,6 @@ public class AuditDaoImpl implements IAuditDao {
 			return null;
 		}
 	}
-
-<<<<<<< HEAD
 	@Override
 	public List<Audit> getAuditsByStatus(int status) {
 		// TODO Auto-generated method stub
@@ -62,7 +60,4 @@ public class AuditDaoImpl implements IAuditDao {
 		query.setInteger("status", status);
 		return query.list();
 	}
-
-=======
->>>>>>> f9ac4843a4f79b74a9f53c04b74cbd9d5705ddae
 }
