@@ -15,13 +15,19 @@ pageContext.setAttribute("ctx", ctx);
 <body>
 <c:forEach items="${audits }" var="audits" varStatus="p">
 <% //这个地方需要考虑一下，如何提交表单，不能只是这样显示出来吧？ %>
-<a href="${ctx}/project/projectdetail/${audits.auditId}">审核编号："${audits.auditId}"</a>
-提交用户："${audits.userId }"
-项目ID: "${audits.projectId }"
-创建时间："${audits.createDateTime }"
-备注："${audits.comment }"
-审核状态："${audits.status}"
+<form name="audit" action="/audit_one_project" method="post">
+<a href="${ctx}/project/projectdetail/${audits.auditId}">审核编号："${audits.auditId}"</a> <br>
+提交用户："${audits.userId }" <br>
+审核名称："${audits.auditName }" <br>
+项目ID: "${audits.projectId }" <br>
+审核ID: "${audits.auditId }" <br>
+创建时间："${audits.createDateTime }" <br>
+备注："${audits.comment }" <br>
+审核状态："${audits.status}" <br>
+<input type="submit" name="action" value="audit_pass" />
+<input type="submit" name="action" value="audit_fail" />
 
+</form>
 </c:forEach>
 
 
