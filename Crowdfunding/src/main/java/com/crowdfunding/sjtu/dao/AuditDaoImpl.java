@@ -54,4 +54,12 @@ public class AuditDaoImpl implements IAuditDao {
 		}
 	}
 
+	@Override
+	public List<Audit> getAuditsByStatus(int status) {
+		// TODO Auto-generated method stub
+		Query query = sessionfactory.getCurrentSession().createQuery("from Audit a where a.status=:status");
+		query.setInteger("status", status);
+		return query.list();
+	}
+
 }

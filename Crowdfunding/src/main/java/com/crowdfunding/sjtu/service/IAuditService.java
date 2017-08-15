@@ -10,4 +10,5 @@ public interface IAuditService {
 	public void saveAudit(Audit audit);
 	public void SaveOrUpdateAudit(Audit audit);
 	public Audit findById(int auditId);
+	public List<Audit> getAuditsByStatus(int status);
 }

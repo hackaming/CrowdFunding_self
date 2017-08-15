@@ -44,4 +44,10 @@ public class AuditServiceImpl implements IAuditService {
 		return auditdao.findById(auditId);
 	}
 
+	@Override
+	public List<Audit> getAuditsByStatus(int status) {
+		// TODO Auto-generated method stub
+		return auditdao.getAuditsByStatus(status);
+	}
+
 }

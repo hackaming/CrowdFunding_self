@@ -12,4 +12,5 @@ public interface IProjectDao {
 	public void saveorUpdate(Project project);
 	public Project getProjectByName(String projectName);
 	public void deleteProject(Integer projectId);
+	public List<Project> getProjectListByStatus(int status);
 }

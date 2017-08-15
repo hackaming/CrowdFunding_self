@@ -51,4 +51,10 @@ public class ProjectServiceImpl implements IProjectService{
 		projectdao.deleteProject(projectId);
 	}
 
+	@Override
+	public List<Project> getProjectListByStatus(int status) {
+		// TODO Auto-generated method stub
+		return projectdao.getProjectListByStatus(status);
+	}
+
 }

@@ -20,7 +20,7 @@ import com.crowdfunding.sjtu.utility.IDateService;
 
 @Controller
 public class ProjectController {
-	//包括项目有关的东西,先把项目有关的增,删,改,查的DAO部分弄完吧,表之类的.
+	//
 	@Autowired
 	private IProjectDao projectDao;
 	@Autowired
@@ -35,7 +35,7 @@ public class ProjectController {
 	
 	@RequestMapping(value="/project/create", method=RequestMethod.POST)
 	public String crtProject(HttpServletRequest req){
-		//接收参数
+		//
 		Project project = new Project();
 		project.setComment(req.getParameter("comment"));
 		project.setCreateDateTime(dateService.getFullDate());
@@ -47,7 +47,7 @@ public class ProjectController {
 		project.setProjectName(req.getParameter("projectName"));
 		project.setStatus(0);
 		projectService.saveProject(project);
-		//调用service存入db，如果成功则返回成功，否则就是失败
+		//
 		if (null != projectService.getProjectByName(req.getParameter("projectName"))){
 			return "project/create_success";
 		} else {
@@ -57,13 +57,13 @@ public class ProjectController {
 	
 	@RequestMapping("/projectlist")
 	public String getProjectList(ModelMap model){
-		//这里要读出所有的projects放到列表里面，然后设置到属性里面，
-		//在jsp页面里面要读出来从
-		List<Project> projectlist = projectService.getProjectList();
+		//
+		//List<Project> projectlist = projectService.getProjectList();
+		List<Project> projectlist = projectService.getProjectListByStatus(2); //status 1 means the project's been audited
 		model.addAttribute("projectlist", projectlist);
 		return "project/project_list";
 	}
-	//这是查看单个项目的详细信息，这里要详细介绍
+	//
 	@RequestMapping(value="/project/projectdetail/{projectId}", method=RequestMethod.GET)
 	public String getProjectlst(@PathVariable(value="projectId") int projectId,ModelMap modelmap){
 		Project project = projectService.getProjectById(projectId);

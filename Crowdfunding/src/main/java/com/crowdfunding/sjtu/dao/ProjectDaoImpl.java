@@ -68,4 +68,12 @@ public class ProjectDaoImpl implements IProjectDao {
 
 	}
 
+	@Override
+	public List<Project> getProjectListByStatus(int status) {
+		// TODO Auto-generated method stub
+		Query query= sessionfactory.getCurrentSession().createSQLQuery("from Project p where p.status=:status");
+		query.setInteger("status", status);
+		return query.list();
+	}
+
 }
