@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GB18030">
-<title>Insert title here</title>
+<title>Audit successful</title>
 </head>
 <body>
-
+Audit successful
 </body>
 </html>

@@ -65,15 +65,17 @@ public class ProjectDaoImpl implements IProjectDao {
 	public void deleteProject(Integer projectId) {
 		// TODO Auto-generated method stub
 		sessionfactory.getCurrentSession().delete(projectId);
-
 	}
 
 	@Override
 	public List<Project> getProjectListByStatus(int status) {
 		// TODO Auto-generated method stub
-		Query query= sessionfactory.getCurrentSession().createSQLQuery("from Project p where p.status=:status");
+		Query query= sessionfactory.getCurrentSession().createQuery("from Project p where p.status=:status");
+		//Query query = sessionfactory.getCurrentSession().createQuery("from Project p where p.projectName =:projectName");
+		//query.setString("projectName", "ss");
 		query.setInteger("status", status);
-		return query.list();
+		List<Project> list = query.list();
+		return list;
 	}
 
 }
