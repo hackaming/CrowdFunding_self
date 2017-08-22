@@ -44,13 +44,13 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>3.4.0.GA</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -144,20 +144,35 @@
 			<artifactId>httpcore</artifactId>
 			<version>4.3.2</version>
 		</dependency>
-<dependency>  
-    <groupId>com.alipay</groupId>  
-    <artifactId>alipay</artifactId>  
-        <version>1.4.2</version>  
-        <scope>system</scope>  
-        <systemPath>D:\java\CrowdFunding_self\Crowdfunding\src\main\webapp\WEB-INF\lib\alipay-sdk-java20170324180803.jar</systemPath>  
-</dependency>  
-<dependency>  
-    <groupId>commons-logging</groupId>  
-    <artifactId>commonslogging</artifactId>  
-        <version>1.1.1</version>  
-        <scope>system</scope>  
-        <systemPath>D:\java\CrowdFunding_self\Crowdfunding\src\main\webapp\WEB-INF\lib\commons-logging-1.1.1.jar</systemPath>  
-</dependency>  
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.nutch/nutch -->
+		<dependency>
+			<groupId>org.apache.nutch</groupId>
+			<artifactId>nutch</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.alipay</groupId>
+			<artifactId>alipay</artifactId>
+			<version>1.4.2</version>
+			<scope>system</scope>
+			<systemPath>D:\java\CrowdFunding_self\Crowdfunding\src\main\webapp\WEB-INF\lib\alipay-sdk-java20170324180803.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commonslogging</artifactId>
+			<version>1.1.1</version>
+			<scope>system</scope>
+			<systemPath>D:\java\CrowdFunding_self\Crowdfunding\src\main\webapp\WEB-INF\lib\commons-logging-1.1.1.jar</systemPath>
+		</dependency>
 
 
 	</dependencies>
@@ -176,10 +191,10 @@
 				<configuration>
 					<source>1.8.045</source>
 					<target>1.8.045</target>
-                        <compilerArguments>
-                             <verbose />
-                              <bootclasspath>D:/java/java1.8.045/lib/lib/rt.jar</bootclasspath>
-                        </compilerArguments>    
+					<compilerArguments>
+						<verbose />
+						<bootclasspath>D:/java/java1.8.045/lib/lib/rt.jar</bootclasspath>
+					</compilerArguments>
 				</configuration>
 			</plugin>
 		</plugins>
