@@ -32,7 +32,7 @@ public class ChatServer {
 	}
 
 	public void serve() { // started to serve,accept client and dispatch it.
-		int id=0;
+		int id = 0;
 		while (true) {
 			try {
 				Socket socket = ss.accept();
@@ -47,6 +47,23 @@ public class ChatServer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+	}
+
+	public void sendMessageToAllClients(String str) {
+		for (Client c : clients) {
+			try {
+				if (c.isStatus()) {
+					DataOutputStream dos = new DataOutputStream(c.getSocket().getOutputStream());
+					dos.writeUTF(str);
+					dos.flush();
+					logger.info("Forwarded the message to:"+c);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 	}
 
@@ -69,11 +86,15 @@ public class ChatServer {
 				dos = new DataOutputStream(client.getSocket().getOutputStream());
 				while (client.isStatus()) { // 一直连着
 					String strdis = dis.readUTF();
-					logger.info("Message that received from the client:" + strdis);
+					logger.info("Message that received from the client:" + client + "Message:" + strdis);
+					// now forward the message to the clients??
+					sendMessageToAllClients(strdis);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				logger.info("exception shows, needs to delete the client?");
+				clients.remove(client);
+				logger.info(client + "is removed!");
 				e.printStackTrace();
 			} finally {
 				// 如何通知服务器线程结束？？？？
