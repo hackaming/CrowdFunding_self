@@ -7,10 +7,10 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
-public class ChatThread implements Runnable{
+public class ChatThread_out implements Runnable{
 	private Client client;
 	Logger logger;
-	public ChatThread(Client client){
+	public ChatThread_out(Client client){
 		this.client = client;
 		this.logger = Logger.getLogger(this.getClass());
 	}

@@ -5,6 +5,7 @@ import java.net.Socket;
 public class Client {
 	private boolean status;
 	private Socket socket;
+	
 	/**
 	 * @return the status
 	 */
