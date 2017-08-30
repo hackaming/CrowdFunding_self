@@ -7,8 +7,8 @@ public class TankUnit extends Movable{
 	public TankUnit(){
 		this.setX(50);
 		this.setY(50);
-		this.setHeight(30);
-		this.setWidth(30);
+		this.setHeight(TankConstants.GAME_HEIGHT);
+		this.setWidth(TankConstants.GAME_WIDTH);
 	}
 	
 	public TankUnit(int x,int y,int z,int b){
@@ -31,13 +31,15 @@ public class TankUnit extends Movable{
 		g.setColor(Color.BLACK);
 		g.fillOval(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 		g.setColor(c);
-		
-		this.setX(this.getX()+5); //making it movable
+		this.move(); //making it movable
 	}
 
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
+		
+		//need to add code to control the border, to adjust x,y
+		this.setX(this.getX()+5);
 		
 	}
 }
