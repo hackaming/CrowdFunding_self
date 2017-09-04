@@ -44,7 +44,7 @@ public class TankClient extends Frame {
 		new Thread(new PaintThread()).start();
 	}
 	public void update(Graphics g){
-		if (null == offScreenImg){
+/*		if (null == offScreenImg){
 			offScreenImg=this.createImage(TankConstants.GAME_WIDTH,TankConstants.GAME_HEIGHT);
 		}
 		Graphics gOffScreen = offScreenImg.getGraphics();
@@ -53,7 +53,7 @@ public class TankClient extends Frame {
 		gOffScreen.fillOval(tu.getX(), tu.getY(), TankConstants.TANK_WIDTH,TankConstants.TANK_HEIGHT);
 		gOffScreen.setColor(c);
 		paint(gOffScreen);
-		g.drawImage(offScreenImg, 0, 0, null);
+		g.drawImage(offScreenImg, 0, 0, null);*/
 	}
 
 	/* (non-Javadoc)
@@ -62,6 +62,7 @@ public class TankClient extends Frame {
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
 		tu.paint(g);
+		//this.update(g);
 	}
 	private class PaintThread implements Runnable{
 		@Override

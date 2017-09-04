@@ -7,8 +7,8 @@ public class TankUnit extends Movable{
 	public TankUnit(){
 		this.setX(50);
 		this.setY(50);
-		this.setHeight(TankConstants.GAME_HEIGHT);
-		this.setWidth(TankConstants.GAME_WIDTH);
+		this.setHeight(TankConstants.TANK_HEIGHT);
+		this.setWidth(TankConstants.TANK_WIDTH);
 	}
 	
 	public TankUnit(int x,int y,int z,int b){
