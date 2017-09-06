@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 public class TankUnit extends Movable{
+	
 	public TankUnit(){
 		this.setX(50);
 		this.setY(50);
@@ -31,14 +32,18 @@ public class TankUnit extends Movable{
 
 	@Override
 	public void paint(Graphics g) {
-
 	}
 
 	@Override
-	public void move() {
+	public void move(Direction dir) {
 		// TODO Auto-generated method stub
 		//need to add code to control the border, to adjust x,y		
 	}
+	
+	public void locate(){
+		//change the dir based on the keys that pressed.
+	}
+	
 	
 	public void KeyPressed(KeyEvent e){
 		switch(e.getKeyCode()){
@@ -67,6 +72,5 @@ public class TankUnit extends Movable{
 			}
 			break;
 		}
-		
 	}
 }

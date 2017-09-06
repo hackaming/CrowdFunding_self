@@ -5,13 +5,14 @@ import java.awt.Graphics;
 public abstract class Movable {
 	private int x; //position
 	private int y; //position
-	private int dir; //direction
 	private int width;
 	private int height;
+	protected enum Direction {U,D,L,R,Ul,Ur,Dl,Dr,S};
+	protected Direction dir = Direction.S;
 	
 	public abstract void draw(Graphics g);
 	public abstract void paint(Graphics g);
-	public abstract void move();
+	public abstract void move(Direction dir);
 	/**
 	 * @return the x
 	 */
@@ -39,13 +40,13 @@ public abstract class Movable {
 	/**
 	 * @return the dir
 	 */
-	public int getDir() {
+	public Direction getDir() {
 		return dir;
 	}
 	/**
 	 * @param dir the dir to set
 	 */
-	public void setDir(int dir) {
+	public void setDir(Direction dir) {
 		this.dir = dir;
 	}
 	/**
