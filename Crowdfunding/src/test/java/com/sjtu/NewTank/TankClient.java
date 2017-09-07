@@ -9,14 +9,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.sjtu.NewTank.Movable.Direction;
+
 //完全跟马士兵老师的一样，先这样写一个吧，把图片，网络版的都整理出来
 //再自己修改
 public class TankClient extends Frame{
 	private TankUnit tk = new TankUnit();
+	private Missle m = new Missle(200,200,Direction.D);
 	private Image offScreenImage = null;
 	public static void main(String argv[]){
-		new TankClient().launchFrame();
-		
+		TankClient tc = new TankClient();
+		tc.launchFrame();
 	}
 	public void launchFrame(){
 		this.setSize(Tank_Constants.GAME_WIDTH, Tank_Constants.GAME_HEIGHT);
@@ -41,6 +44,7 @@ public class TankClient extends Frame{
 	
 	public void paint(Graphics g){
 		tk.draw(g);
+		m.draw(g);
 	}
 	public void update(Graphics g){
 		if (null == offScreenImage){
@@ -81,6 +85,11 @@ public class TankClient extends Frame{
 		public void keyPressed(KeyEvent e) {
 			System.out.println("Key pressed!");
 			tk.KeyPressed(e);
+		}
+		@Override
+		public void keyReleased(KeyEvent e) {
+			System.out.println("Key pressed!");
+			tk.keyReleased(e);
 		}
 	
 	}

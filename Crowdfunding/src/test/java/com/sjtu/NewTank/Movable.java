@@ -12,7 +12,7 @@ public abstract class Movable {
 	
 	public abstract void draw(Graphics g);
 	public abstract void paint(Graphics g);
-	public abstract void move(Direction dir);
+	public abstract void move();
 	/**
 	 * @return the x
 	 */
