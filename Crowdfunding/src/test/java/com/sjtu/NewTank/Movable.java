@@ -9,6 +9,7 @@ public abstract class Movable {
 	private int height;
 	protected enum Direction {U,D,L,R,Ul,Ur,Dl,Dr,S};
 	protected Direction dir = Direction.S;
+	protected Direction predir = Direction.U;
 	
 	public abstract void draw(Graphics g);
 	public abstract void paint(Graphics g);
@@ -72,6 +73,18 @@ public abstract class Movable {
 	 */
 	public void setHeight(int height) {
 		this.height = height;
+	}
+	/**
+	 * @return the predir
+	 */
+	public Direction getPredir() {
+		return predir;
+	}
+	/**
+	 * @param predir the predir to set
+	 */
+	public void setPredir(Direction predir) {
+		this.predir = predir;
 	}
 	
 }
