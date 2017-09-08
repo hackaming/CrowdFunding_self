@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class TankUnit extends Movable{
 	private boolean bKeyU=false,bKeyD=false,bKeyL=false,bKeyR=false;
-	private ArrayList<Missle> missles = new ArrayList<Missle>();
+	//private ArrayList<Missle> missles = new ArrayList<Missle>();
 	
 	public TankUnit(){
 		this.setX(50);
@@ -30,9 +30,9 @@ public class TankUnit extends Movable{
 		Color c = g.getColor();
 		g.setColor(Color.BLACK);
 		g.fillOval(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-		for (int i=0;i<missles.size();i++){
+/*		for (int i=0;i<missles.size();i++){
 			missles.get(i).draw(g);
-		}
+		}*/
 		g.setColor(c);
 		move();
 	}
@@ -77,7 +77,7 @@ public class TankUnit extends Movable{
 			break;
 		}
 
-		for (int i=0;i<missles.size();i++){
+/*		for (int i=0;i<missles.size();i++){
 			if (missles.get(i).getX()<10){ //出界了，
 				missles.remove(i);
 			}
@@ -90,7 +90,7 @@ public class TankUnit extends Movable{
 			if (missles.get(i).getY()>570){
 				missles.remove(i);
 			}
-		}
+		}*/
 		
 		//加入判断是否出界
 		if (this.getX()<10){
@@ -138,9 +138,9 @@ public class TankUnit extends Movable{
 		}
 		
 	}
-	public void shoot(){
+	public Missle shoot(){
 		Missle m = new Missle(this.getX(),this.getY(),predir);
-		missles.add(m);
+		return m;
 	}
 	public void KeyPressed(KeyEvent e){
 		switch(e.getKeyCode()){
