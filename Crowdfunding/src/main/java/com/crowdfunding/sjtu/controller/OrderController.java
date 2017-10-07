@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.crowdfunding.sjtu.MQ.OrderProduce;
 import com.crowdfunding.sjtu.model.Orders;
 import com.crowdfunding.sjtu.model.Project;
 import com.crowdfunding.sjtu.model.User;
@@ -22,6 +23,8 @@ import com.crowdfunding.sjtu.utility.IDateService;
 @Controller
 public class OrderController {
 	@Autowired
+	private OrderProduce orderproduce;
+	@Autowired
 	private IProjectService projectservice;
 	@Autowired
 	private IUserService userservice;
@@ -31,7 +34,7 @@ public class OrderController {
 	private IOrderService orderservice;
 	Logger logger = Logger.getLogger(this.getClass());
 	@RequestMapping(value="/orderstart")
-	public String orderStart(String projectid,HttpServletRequest req,ModelMap model){
+	public String orderStart(String projectid,HttpServletRequest req,ModelMap model,HttpSession session){
 //projectID取不到值还要调试，查一下
 		//String projectid=req.getParameter("projectid");
 		//System.out.println("now project id get in orderconfirm from ordercontroller is:" + projectid);
@@ -41,7 +44,69 @@ public class OrderController {
 		System.out.println("The string projectid after convert to integer is:" + Integer.parseInt(projectid));
 		Project project = projectservice.getProjectById(Integer.parseInt(projectid.trim()));
 		model.addAttribute("project", project);
+		orderSubmitToMq(session); //测试代码，模拟用户下单，直接调用该参数看是否会发送给消息队列
 		return  "orders/order_submit";
+	}
+	@RequestMapping("/order/orderTestMq")
+	public String orderString(HttpSession session){
+		String projectId = "1";
+		String shares = "1";
+		User user = (User)session.getAttribute("user");
+		if (null != user){ //session里面没有值，则未登录成功，重新登录
+			System.out.println("user id is"+user.getUserId());
+			System.out.println("user name is"+user.getUserName() + "successfully get the user from session.");	
+		} else{
+			return "user/login";
+		}
+		
+		Project project = projectservice.getProjectById(Integer.parseInt(projectId));
+		Orders order = new Orders();
+		order.setProjectId(project.getProjectId());
+		order.setUserId(user.getUserId());
+		order.setShares(Integer.parseInt(shares));
+		float totalAmount = Float.parseFloat(project.getPrice()) * Float.parseFloat(shares);
+		order.setTotalAmount(totalAmount);
+		order.setStatus(0); //0 is the initial status, not confirm by user
+		order.setComment("0 is theinitial status, not confirmed by user");
+		//   orderservice.saveOrder(order);
+		// do not save to db directly, send it to mq and wait to deal with.
+		// add code below to send the data to mq.
+		for (int i=0;i<100;i++){
+			System.out.println("now send it to mq "+i+" times");
+			order.setComment("need get a request id!");
+			orderproduce.sendDataToQueue("orders", order);
+		}
+		
+		return null;
+	}
+	@RequestMapping("/order/ordersubmittoMQ")
+	public String orderSubmitToMq(HttpSession session){
+		String projectId = "1";
+		String shares = "1";
+		User user = (User)session.getAttribute("user");
+		if (null != user){ //session里面没有值，则未登录成功，重新登录
+			System.out.println("user id is"+user.getUserId());
+			System.out.println("user name is"+user.getUserName() + "successfully get the user from session.");	
+		} else{
+			return "user/login";
+		}
+		Project project = projectservice.getProjectById(Integer.parseInt(projectId));
+		Orders order = new Orders();
+		order.setProjectId(project.getProjectId());
+		order.setUserId(user.getUserId());
+		order.setShares(Integer.parseInt(shares));
+		float totalAmount = Float.parseFloat(project.getPrice()) * Float.parseFloat(shares);
+		order.setTotalAmount(totalAmount);
+		order.setStatus(0); //0 is the initial status, not confirm by user
+		order.setComment("0 is theinitial status, not confirmed by user");
+		//   orderservice.saveOrder(order);
+		// do not save to db directly, send it to mq and wait to deal with.
+		// add code below to send the data to mq.
+		for (int i=0;i<100;i++){
+			System.out.println("now send it to mq "+i+" times");
+			orderproduce.sendDataToQueue("orders", order);
+		}
+		return null;
 	}
 	
 	@RequestMapping("/order/ordersubmit")
