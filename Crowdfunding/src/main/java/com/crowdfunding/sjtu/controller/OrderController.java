@@ -71,10 +71,11 @@ public class OrderController {
 		//   orderservice.saveOrder(order);
 		// do not save to db directly, send it to mq and wait to deal with.
 		// add code below to send the data to mq.
-		for (int i=0;i<100;i++){
+		for (int i=0;i<5;i++){
 			System.out.println("now send it to mq "+i+" times");
 			order.setComment("need get a request id!");
-			orderproduce.sendDataToQueue("orders", order);
+			orderproduce.sendDataToQueue("ordersCrowdfunding", order);
+			orderproduce.sendDataToQueue("ordersCrowdfunding", "test");
 		}
 		
 		return null;
@@ -102,9 +103,10 @@ public class OrderController {
 		//   orderservice.saveOrder(order);
 		// do not save to db directly, send it to mq and wait to deal with.
 		// add code below to send the data to mq.
-		for (int i=0;i<100;i++){
+		for (int i=0;i<5;i++){
 			System.out.println("now send it to mq "+i+" times");
 			orderproduce.sendDataToQueue("orders", order);
+			orderproduce.sendDataToQueue("orders", "test");
 		}
 		return null;
 	}
