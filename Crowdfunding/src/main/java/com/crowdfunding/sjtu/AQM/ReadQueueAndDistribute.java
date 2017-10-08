@@ -1,5 +1,8 @@
 package com.crowdfunding.sjtu.AQM;
 
+import java.text.ParseException;
+
+import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -26,7 +29,19 @@ public class ReadQueueAndDistribute implements MessageListener {
 		 byte[] dd  = message.getBody();
 		System.out.println("test*************test");
 		System.out.println(dd);
-
+		message.getBody();
+		System.out.println(message.getBody().toString());
+		
+		try {
+			Object o = JSONValue.parseWithException(message.getBody().toString());
+			RequestSerialVO v = (RequestSerialVO) o;
+			System.out.println(v.getId()+"###now it is the ID!");
+		} catch (org.json.simple.parser.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	public void onMessage(Message message,String i){
 		/*Object obj = amqpTemplate.receiveAndConvert();
@@ -40,22 +55,17 @@ public class ReadQueueAndDistribute implements MessageListener {
 		System.out.println("****message get in onmessage*******System.out.println(message.getMessageProperties());***");
 		System.out.println(message.getMessageProperties());
 
-		System.out.println(message.getBody().toString());
-
+/*		System.out.println(message.getBody().toString());
+		try {
+			Object o = JSONValue.parseWithException(message.toString());
+			RequestSerialVO v = (RequestSerialVO) o;
+			System.out.println(v.getId()+"is the id!");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		// logger.info("Crowdfundng receive message------->:{}",
 		// message.getBody());
-		Object o = convert.fromMessage(message);
-		System.out.println("******Object o = convert.fromMessage(message);******");
-		System.out.println(o);
-		System.out.println("******System.out.println(o.toString());***********");
-		System.out.println(o.toString());
-
-		System.out.println("See if the object o is:" + o == null);
-
-		System.out.println("********END******");
-		RequestSerialVO vo = (RequestSerialVO) convert.fromMessage(message);
-		System.out.println("now show the message id:" + vo.getId());
-		showVO(vo);
 
 	}
 	public void showVO(RequestSerialVO vo) {
