@@ -4,7 +4,7 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+import org.springframework.stereotype.Service;
 
 public class ReadQueueAndDistribute implements MessageListener{
 
