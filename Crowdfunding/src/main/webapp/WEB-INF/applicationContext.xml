@@ -57,7 +57,7 @@
 		auto-delete="false" exclusive="false"  declared-by="connectAdmin" />
 
 	<!-- 定义EXCHANGE -->
-	<rabbit:direct-exchange name="orders-exchange"
+	<rabbit:direct-exchange name="orders_exchange"
 		durable="true" auto-delete="false" id="orders_exchange"  declared-by="connectAdmin">
 		<rabbit:bindings>
 			<rabbit:binding queue="orders" key="ordersCrowdfunding" />
@@ -66,14 +66,14 @@
 
 	<!-- spring template声明 -->
 	<rabbit:template id="amqpTemplate" exchange="orders_exchange"
-		connection-factory="connectionFactory9"   />
+		connection-factory="connectionFactory9"  message-converter="jsonMessageConverter" />
 	    
         <!-- 消息接收者 -->
     <bean id="readqueueanddistribute" class="com.crowdfunding.sjtu.AQM.ReadQueueAndDistribute" />
     
-	<!-- 配置监听 -->
+	<!-- 配置监听 requeue-rejected="false" 避免异常消息重新入队？-->
 	<rabbit:listener-container
-		connection-factory="connectionFactory9" acknowledge="auto">
+		connection-factory="connectionFactory9" acknowledge="auto" requeue-rejected="false" >
 		<rabbit:listener queues="orders" ref="readqueueanddistribute" />
 	</rabbit:listener-container>
 
