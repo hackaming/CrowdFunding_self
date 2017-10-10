@@ -17,14 +17,14 @@ public class OrderProduceImpl implements OrderProduce{
 	public void sendDataToQueue(String queueKey, Object object) {
 		// TODO Auto-generated method stub
 		RequestSerialVO vo =(RequestSerialVO) object;
-		
+/*		
     	System.out.println("********now the vo get sendDataToQueue in mq is:");
     	System.out.println(vo.getId());
     	System.out.println(vo.getPrice());
     	System.out.println(vo.getProjectid());
     	System.out.println(vo.getShares());
     	System.out.println(vo.getUserid());
-    	System.out.println("*******end!!!is about to send!!");
+    	System.out.println("*******end!!!is about to send!!");*/
     	
 		amqpTemplate.convertAndSend(queueKey,object);
 		
