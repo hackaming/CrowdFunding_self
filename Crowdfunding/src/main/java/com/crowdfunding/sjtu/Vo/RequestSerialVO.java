@@ -5,7 +5,7 @@ public class RequestSerialVO {
 	private int userid;
 	private int projectid;
 	private int shares;
-	private double price;
+	private float price;
 	/**
 	 * @return the id
 	 */
@@ -57,13 +57,13 @@ public class RequestSerialVO {
 	/**
 	 * @return the price
 	 */
-	public double getPrice() {
+	public float getPrice() {
 		return price;
 	}
 	/**
 	 * @param price the price to set
 	 */
-	public void setPrice(double price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 

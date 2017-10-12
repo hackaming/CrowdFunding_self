@@ -82,7 +82,7 @@ public class OrderController {
 		requestserialvo.setProjectid(projectId);
 		requestserialvo.setUserid(user.getUserId());
 		requestserialvo.setShares(Integer.parseInt(shares));
-		requestserialvo.setPrice(Double.parseDouble(project.getPrice()));
+		requestserialvo.setPrice(Float.parseFloat(project.getPrice()));
 		requestserialvo.setId(requestserialservice.getRequestSerial(user.getUserId() + ""));
 		logger.info(
 				"now the request serial's been generated and will send to the mq, then will be starting to check if the result shows"
@@ -169,7 +169,7 @@ public class OrderController {
 		requestserialvo.setProjectid(project1.getProjectId());
 		requestserialvo.setUserid(user.getUserId());
 		requestserialvo.setShares(Integer.parseInt(shares));
-		requestserialvo.setPrice(Double.parseDouble(project.getPrice()));
+		requestserialvo.setPrice(Float.parseFloat(project.getPrice()));
 		requestserialvo.setId(requestserialservice.getRequestSerial(user.getUserId() + ""));
 		logger.info(
 				"now the request serial's been generated and will send to the mq, then will be starting to check if the result shows"

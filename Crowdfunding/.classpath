@@ -29,5 +29,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/java/respository/com/caucho/hessian/4.0.7/hessian-4.0.7.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -18,7 +18,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
-import org.eclipse.jdt.internal.compiler.ast.ThisReference;
+
 
 public class ChatClient extends Frame{
 	private TextField tfTxt = new TextField();

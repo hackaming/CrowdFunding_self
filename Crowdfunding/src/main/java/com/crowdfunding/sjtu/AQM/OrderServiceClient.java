@@ -6,7 +6,7 @@ import com.crowdfunding.sjtu.AQM.IOrderService;
 import com.crowdfunding.sjtu.AQM.IHSTest;
 
 public class OrderServiceClient {
-	private String url = "http://localhost:8080/OrderBusinessService/us"; //need to change according;
+	private String url = "http://localhost:8080/Crowdfunding/remote/OrderService"; //need to change according;
 	private String url1 = "http://localhost:8080/Crowdfunding/us"; //need to change according;
 	
 	public OrderServiceClient (String strNodeName){
@@ -18,7 +18,7 @@ public class OrderServiceClient {
 	       IHSTest os;
 		try {
 			System.out.println("Begin to call!");
-			os = (IHSTest)factory.create(IHSTest.class, url1);
+			os = (IHSTest)factory.create(IHSTest.class, url);
 	       System.out.println(os.hello()); // process
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -32,7 +32,7 @@ public class OrderServiceClient {
 	       IOrderService os;
 		try {
 			os = (IOrderService)factory.create(IOrderService.class, url1);
-	        os.saveOrder(null); // process
+	        //os.saveOrder(n); // process
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
