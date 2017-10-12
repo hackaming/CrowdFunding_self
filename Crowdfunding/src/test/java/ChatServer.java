@@ -5,6 +5,8 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.crowdfunding.sjtu.Vo.ServerInfo;
+
 import NetworkRelated.NodeInfo;
 
 public class ChatServer {
@@ -55,9 +57,12 @@ public class ChatServer {
 				HashMap mni;
 				try {
 					//ni = (NodeInfo) ois.readObject();
-					mni = (HashMap) ois.readObject();
-					System.out.println(mni.get("NodeName"));
-					System.out.println(mni.get("CPU"));
+					//mni = (HashMap) ois.readObject();
+					ServerInfo si = (ServerInfo) ois.readObject();
+					System.out.println(si.getCpuUsage());
+					System.out.println(si.getNodeName());
+/*					System.out.println(mni.get("NodeName"));
+					System.out.println(mni.get("CPU"));*/
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -19,7 +19,7 @@ public class NodeClient {
 	private static Socket s = null;
 	
 	private static ObjectOutputStream oos = null;
-	private static ServerInfo  mni = null;
+	private static ServerInfo  mni = new ServerInfo();
 
 	public static void main(String argv[]) {
 		NodeClient cc = new NodeClient();
@@ -33,7 +33,6 @@ public class NodeClient {
 	}
 public static void loadConfiguration(){
 	//load the nodes name!
-	mni = new ServerInfo();
 	mni.setNodeName("SHG076CR33723HH");
 }
 	public static void connect() {
@@ -45,7 +44,9 @@ public static void loadConfiguration(){
 			CpuUsage cpu = new CpuUsage();
 			Float bUsage = cpu.getCpuRatioForWindows();
 			//ni.setCpuUsage(bUsage);
+			ServerInfo mni = new ServerInfo();
 			mni.setCpuUsage(bUsage);
+			mni.setNodeName("XianmingTest");
 			
 			oos.writeObject(mni);
 			oos.flush();

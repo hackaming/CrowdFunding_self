@@ -44,6 +44,10 @@ public static void loadConfiguration(){
 			CpuUsage cpu = new CpuUsage();
 			Float bUsage = cpu.getCpuRatioForWindows();
 			//ni.setCpuUsage(bUsage);
+			
+			HashMap hh = new HashMap();
+			hh.put("NodeName", "xianmingNodeTest");
+			hh.put("CPU", bUsage);
 			mni.setCpuUsage(bUsage);
 			
 			oos.writeObject(mni);

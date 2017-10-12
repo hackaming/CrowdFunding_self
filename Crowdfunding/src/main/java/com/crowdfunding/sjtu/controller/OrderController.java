@@ -58,12 +58,14 @@ public class OrderController {
 
 	@RequestMapping("/order/test")
 	public String orderStringtest() {
+		//这里需要写一段测试代码，获取某个用户的SESSION,批量产多少个数据，什么的。然后看会不会有效果！！
+		//目前主要是要形成一个RequestVO，然后发给后台，进行处理，至于说处理请求，还要改SERVIE层！
 		for (int i = 0; i < 1; i++) {
 			orderproduce.sendDataToQueue("ordersCrowdfunding", "dfdfd");
 		}
 		return "user/login";
 	}
-
+	
 	@RequestMapping("/order/orderTestMq")
 	public String orderStringToMq(@RequestParam int projectId, @RequestParam String shares, HttpSession session,
 			ModelMap model) {

@@ -5,6 +5,7 @@ import com.crowdfunding.sjtu.Vo.RequestSerialVO;
 import com.crowdfunding.sjtu.Vo.ServerInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.*;
+import com.crowdfunding.sjtu.Vo.ServerInfo;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -84,20 +85,21 @@ public class ManualReceiveMQMessage {
 			while (bConnected) {
 				try {
 					// ni = (NodeInfo) ois.readObject();
-					ServerInfo mni = (ServerInfo) ois.readObject();
+					//ServerInfo mni = (ServerInfo) ois.readObject();
+					ServerInfo si = (ServerInfo) ois.readObject();
 					boolean bfound=false;
 					for (int i=0;(i<nodesInfo.size()) && (bfound==false);i++){
 						bfound=false;
-						if (nodesInfo.get(i).getNodeName().equals(mni.getNodeName())){
+						if (nodesInfo.get(i).getNodeName().equals(si.getNodeName())){
 							bfound = true;
-							nodesInfo.get(i).setCpuUsage(mni.getCpuUsage());
+							nodesInfo.get(i).setCpuUsage(si.getCpuUsage());
 						}
 					}
 					if (!bfound){
-						nodesInfo.add(mni); // 存入节点列表	
+						nodesInfo.add(si); // 存入节点列表	
 					}
-					System.out.println(mni.getNodeName());
-					System.out.println(mni.getCpuUsage());
+					System.out.println(si.getNodeName());
+					System.out.println(si.getCpuUsage());
 					System.out
 							.println("The above node has been saved into the arrylist! from run in the client thread");
 				} catch (Exception e) {

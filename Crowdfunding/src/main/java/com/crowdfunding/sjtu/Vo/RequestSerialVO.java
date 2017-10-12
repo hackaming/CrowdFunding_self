@@ -1,6 +1,8 @@
 package com.crowdfunding.sjtu.Vo;
 
-public class RequestSerialVO {
+import java.io.Serializable;
+
+public class RequestSerialVO implements Serializable{
 	private String id;
 	private int userid;
 	private int projectid;
