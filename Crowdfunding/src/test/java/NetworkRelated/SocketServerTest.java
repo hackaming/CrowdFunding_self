@@ -10,17 +10,17 @@ public class SocketServerTest {
 	private static NodeInfo nis; 
 	private static HashMap hm;
 	public static void start() throws IOException, ClassNotFoundException{
-		ServerSocket ss= new ServerSocket(5678);
+		ServerSocket ss= new ServerSocket(19999);
 		System.out.println("Server started.");
 		Socket s = ss.accept();
 		ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
-		//hm = (HashMap) ois.readObject();
-		nis = (NodeInfo) ois.readObject();
+		hm = (HashMap) ois.readObject();
+		//nis = (NodeInfo) ois.readObject();
 	}
 	public static void main(String argv[]) throws ClassNotFoundException, IOException{
 		start();
-		System.out.println(nis.getStrNodeName());
-		System.out.println(nis.getCpuUsage());
+		//System.out.println(nis.getStrNodeName());
+		//System.out.println(nis.getCpuUsage());
 		//System.out.println(hm.get("nodename"));
 		//System.out.println(hm.get("cpu"));
 		System.out.println("Server end.");

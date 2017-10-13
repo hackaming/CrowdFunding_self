@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class SocketClientTest {
 	public static void main(String argv[]) throws UnknownHostException, IOException{
-		Socket s = new Socket("127.0.0.2", 5678);
+		Socket s = new Socket("10.62.150.33", 19999);
 		NodeInfo ni = new NodeInfo();
 		ni.setCpuUsage(0.0);
 		ni.setStrNodeName("xianmingtestnode");
@@ -19,7 +19,7 @@ public class SocketClientTest {
 		hm.put("cpu", 0.0);
 		
 		ObjectOutputStream ois= new ObjectOutputStream(s.getOutputStream());
-		ois.writeObject(ni);
+		ois.writeObject(hm);
 		ois.flush();
 	}
 }

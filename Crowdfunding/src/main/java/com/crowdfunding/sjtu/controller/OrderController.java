@@ -76,10 +76,8 @@ public class OrderController {
 		} else {
 			return "user/login";
 		}
-
-		RequestSerialVO requestserialvo = new RequestSerialVO();
-
 		Project project = projectservice.getProjectById((projectId));
+		RequestSerialVO requestserialvo = new RequestSerialVO();
 		Orders order = new Orders();
 		requestserialvo.setProjectid(projectId);
 		requestserialvo.setUserid(user.getUserId());
@@ -97,8 +95,8 @@ public class OrderController {
 		return null;
 	}
 
-	@RequestMapping("/order/ordersubmittoMQ")
-	public String orderSubmitToMq(@RequestParam String projectId, @RequestParam String shares, HttpSession session,
+	@RequestMapping("/order/ordersubmit")  // 原先这个链接不是叫这个名字，是下面这个，现在不用下面这个，改用MQ，2017/10/13
+	public String orderSubmitToMq(@RequestParam int projectId, @RequestParam String shares, HttpSession session,
 			ModelMap model) {
 		User user = (User) session.getAttribute("user");
 		if (null != user) { // session里面没有值，则未登录成功，重新登录
@@ -107,27 +105,25 @@ public class OrderController {
 		} else {
 			return "user/login";
 		}
-		Project project = projectservice.getProjectById(Integer.parseInt(projectId));
+		Project project = projectservice.getProjectById(projectId);
+		RequestSerialVO requestserialvo = new RequestSerialVO();
 		Orders order = new Orders();
-		order.setProjectId(project.getProjectId());
-		order.setUserId(user.getUserId());
-		order.setShares(Integer.parseInt(shares));
-		float totalAmount = Float.parseFloat(project.getPrice()) * Float.parseFloat(shares);
-		order.setTotalAmount(totalAmount);
-		order.setStatus(0); // 0 is the initial status, not confirm by user
-		order.setComment("0 is theinitial status, not confirmed by user");
-		// orderservice.saveOrder(order);
-		// do not save to db directly, send it to mq and wait to deal with.
-		// add code below to send the data to mq.
-		for (int i = 0; i < 5; i++) {
-			System.out.println("now send it to mq " + i + " times");
-			orderproduce.sendDataToQueue("orders", order);
-			orderproduce.sendDataToQueue("orders", "test");
-		}
+		requestserialvo.setProjectid(projectId);
+		requestserialvo.setUserid(user.getUserId());
+		requestserialvo.setShares(Integer.parseInt(shares));
+		requestserialvo.setPrice(Float.parseFloat(project.getPrice()));
+		requestserialvo.setId(requestserialservice.getRequestSerial(user.getUserId() + ""));
+		logger.info(
+				"now the request serial's been generated and will send to the mq, then will be starting to check if the result shows"
+						+ requestserialvo.getId());
+
+		System.out.println("The requestserial vo's generated, the id is:" + requestserialvo.getId()+"now send to MQ to deal with!");
+		orderproduce.sendDataToQueue("ordersCrowdfunding", requestserialvo);
+		System.out.println("need to add code here to check the result in Redis");
 		return null;
 	}
 
-	@RequestMapping("/order/ordersubmit")
+	@RequestMapping("/order/ordersubmit1") //原来是直接存DB，改成MQ的形式2017/10/13
 	public String orderSubmit(@RequestParam String projectId, @RequestParam String shares, HttpSession session,
 			ModelMap model) {
 		// 把双数接收过来

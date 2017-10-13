@@ -64,7 +64,7 @@ public class OrderServiceImpl implements IOrderService{
 	}
 
 	@Override
-	public Serializable saveOrder(RequestSerialVO vo) {
+	public Serializable saveOrderBasedOnSerial(RequestSerialVO vo) {
 		// TODO Auto-generated method stub
 		Orders order = new Orders();
 		order.setProjectId(vo.getProjectid());

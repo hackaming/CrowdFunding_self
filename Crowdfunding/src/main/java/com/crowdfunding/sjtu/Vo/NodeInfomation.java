@@ -2,7 +2,7 @@ package com.crowdfunding.sjtu.Vo;
 
 import java.io.Serializable;
 
-public class ServerInfo implements Serializable{
+public class NodeInfomation implements Serializable{
 	private String nodeName;
 	private float CpuUsage;
 	private int intConnection;

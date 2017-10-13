@@ -1,5 +1,7 @@
 package com.crowdfunding.sjtu.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +9,7 @@ import javax.persistence.Id;
 
 //注意，那些一对一，一对多的还没配置，跟用户和项目表都有关联
 @Entity
-public class Orders {
+public class Orders implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int orderId;

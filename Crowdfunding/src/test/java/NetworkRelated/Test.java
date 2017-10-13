@@ -1,12 +1,14 @@
-package com.crowdfunding.sjtu.AQM;
+package NetworkRelated;
 
 import java.net.MalformedURLException;
 
 import com.caucho.hessian.client.HessianProxyFactory;
+import com.crowdfunding.sjtu.AQM.IHSTest;
+import com.crowdfunding.sjtu.AQM.IOrderService;
 
 public class Test {
 	public void test1() {
-		HessianProxyFactory factory = new HessianProxyFactory();
+/*		HessianProxyFactory factory = new HessianProxyFactory();
 		IOrderService os;
 		try {
 			os = (IOrderService) factory.create(IOrderService.class,
@@ -15,7 +17,7 @@ public class Test {
 		} catch (MalformedURLException e) {
 
 			e.printStackTrace();
-		}
+		}*/
 
 	}
 
@@ -25,7 +27,7 @@ public class Test {
 
 
 	public void test() {
-		String url = "http://localhost:8080/Crowdfunding/us";
+/*		String url = "http://localhost:8080/Crowdfunding/us";
 		HessianProxyFactory factory = new HessianProxyFactory();
 		IHSTest hello;
 		try {
@@ -35,9 +37,9 @@ public class Test {
 			// System.out.println(hello.hello());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
-
+/*
 	public void testBasicAPI() {
 		String url = "http://localhost:8080/Crowdfunding/remote/test";
 		HessianProxyFactory factory = new HessianProxyFactory();
@@ -50,5 +52,5 @@ public class Test {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
