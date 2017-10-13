@@ -112,7 +112,7 @@ public class ManualReceiveMQMessage {
 	// 连接mq
 	public void connectToMQ() throws Exception {
 		factory = new ConnectionFactory();
-		factory.setHost("10.62.150.33"); // 这些东西要配置文件化
+		factory.setHost("192.168.0.104"); // 这些东西要配置文件化
 		factory.setVirtualHost("crowdfunding");
 		factory.setUsername("crowdfunding");
 		factory.setPassword("crowdfunding");
@@ -179,8 +179,8 @@ public class ManualReceiveMQMessage {
 
 	private class HessianDealWithOrder implements Runnable {
 		private RequestSerialVO vo=null;
-		private String url = "http://10.62.150.16:9090/Crowdfunding/remote/OrderService"; // need
-		private String urltest = "http://10.62.150.16:9090/Crowdfunding/remote/test"; // need
+		private String url = "http://192.168.0.106:9090/Crowdfunding/remote/OrderService"; // need
+		private String urltest = "http://192.168.0.106:9090/Crowdfunding/remote/test"; // need
 		public HessianDealWithOrder(RequestSerialVO vo, String nodesName) {
 			this.vo = vo;
 			System.out.println("Check if the vo's type is what?"+vo.getClass());
