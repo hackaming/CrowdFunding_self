@@ -1,10 +1,19 @@
 package com.crowdfunding.sjtu.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +45,8 @@ public class OrderController {
 	private IOrderService orderservice;
 	@Autowired
 	private IRequestSerialService requestserialservice;
+	@Autowired
+	RedisTemplate<String, Object> redisTemplate;
 
 	Logger logger = Logger.getLogger(this.getClass());
 
@@ -94,7 +105,7 @@ public class OrderController {
 
 		return null;
 	}
-
+//2017/10/14
 	@RequestMapping("/order/ordersubmit")  // 原先这个链接不是叫这个名字，是下面这个，现在不用下面这个，改用MQ，2017/10/13
 	public String orderSubmitToMq(@RequestParam int projectId, @RequestParam String shares, HttpSession session,
 			ModelMap model) {
@@ -107,7 +118,6 @@ public class OrderController {
 		}
 		Project project = projectservice.getProjectById(projectId);
 		RequestSerialVO requestserialvo = new RequestSerialVO();
-		Orders order = new Orders();
 		requestserialvo.setProjectid(projectId);
 		requestserialvo.setUserid(user.getUserId());
 		requestserialvo.setShares(Integer.parseInt(shares));
@@ -119,8 +129,67 @@ public class OrderController {
 
 		System.out.println("The requestserial vo's generated, the id is:" + requestserialvo.getId()+"now send to MQ to deal with!");
 		orderproduce.sendDataToQueue("ordersCrowdfunding", requestserialvo);
+		
+		//应该是根据这个请求流水，将数据读出来，跳转order_confirm
 		System.out.println("need to add code here to check the result in Redis");
-		return null;
+		Orders order = testRedisWithMapGet(requestserialvo.getId()); //get the order from redis		
+		model.addAttribute("order", order);	
+		return "orders/order_confirm";
+	}
+	
+	public void tt(final String key){
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			public void run() {
+				Orders order = testRedisWithMapGet(key);
+			}
+		}, 500, 10000);
+	}
+	
+	public Orders testRedisWithMapGet(String key) {
+		HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
+		HashMap<Object,Object> map =new HashMap();
+		
+		for (int i = 0;i<10;i++){
+			if ((hash.entries(key).size()==0)){
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		Orders o = null;
+		if ((hash.entries(key).size()!=0)){
+			map =  (HashMap<Object, Object>) hash.entries(key);
+			System.out.println(map);
+			o = new Orders();
+			o.setComment((String) map.get("comment"));
+			o.setShares((Integer) map.get("shares"));
+			o.setStatus((Integer) map.get("shares"));
+			o.setTotalAmount((Float) map.get("totalAmount"));
+			o.setUserId((Integer) map.get("userId"));
+			o.setProjectId((Integer) map.get("projectId"));
+			o.setCreateDateTime((String) map.get("createDateTime"));
+			o.setOrderId((Integer) map.get("orderId"));
+		} else {
+			System.out.println("Order get failed,it is null!,Need to think out a way to get the data!");
+		}
+		if (o != null){
+			System.out.println("Order get from redis!--start");
+			System.out.println(o.getComment());
+			System.out.println(o.getCreateDateTime());
+			System.out.println(o.getOrderId());
+			System.out.println(o.getUserId());
+			System.out.println(o.getStatus());
+			System.out.println("Order get from redis!--end--now return to order controller");
+		} else{
+			System.out.println("Order get failed,it is null!");
+		}
+
+		return o;
 	}
 
 	@RequestMapping("/order/ordersubmit1") //原来是直接存DB，改成MQ的形式2017/10/13
@@ -186,9 +255,6 @@ public class OrderController {
     	System.out.println("*******end");
 		
 		//***above section's only for testing!!
-		
-		
-		
 		return "orders/order_confirm";
 	}
 

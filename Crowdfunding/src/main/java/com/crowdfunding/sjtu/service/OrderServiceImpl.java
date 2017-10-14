@@ -1,9 +1,12 @@
 package com.crowdfunding.sjtu.service;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +22,8 @@ public class OrderServiceImpl implements IOrderService{
 	private IOrderDao orderdao;
 	@Autowired
 	private IDateService dateservice;
+	@Autowired
+	RedisTemplate<String, Object> redisTemplate;
 	
 	@Override
 	public Serializable saveOrder(Orders order) {
@@ -73,7 +78,31 @@ public class OrderServiceImpl implements IOrderService{
 		order.setCreateDateTime(dateservice.getFullDate());
 		order.setStatus(0);
 		order.setComment("set status to 0, initial status.");
-		return this.saveOrder(order);
+		Serializable i = this.saveOrder(order);
+		//add code here to put the data into the redis 2017/10/14
+		HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
+		HashMap<String,Object> map = new HashMap();
+		Orders o = new Orders();
+		o.setComment("dd");
+		o.setCreateDateTime("fff");
+		o.setOrderId(22);
+		o.setProjectId(11);
+		o.setShares(2);
+		o.setStatus(1);
+		o.setTotalAmount(5f);
+		o.setUserId(3);
+		
+		map.put("orderId",o.getOrderId());
+		map.put("createDateTime",o.getCreateDateTime());
+		map.put("projectId",o.getProjectId());
+		map.put("userId",o.getUserId());
+		map.put("totalAmount",o.getTotalAmount());
+		map.put("status",o.getStatus());
+		map.put("shares",o.getShares());
+		map.put("comment",o.getComment());
+		hash.putAll(vo.getId(), map);
+		
+		return i;
 	}
 
 }
