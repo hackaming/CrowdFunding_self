@@ -6,6 +6,7 @@ import com.crowdfunding.sjtu.Vo.RequestSerialVO;
 import com.crowdfunding.sjtu.model.Orders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.*;
+import com.rabbitmq.client.AMQP.BasicProperties;
 
 import NetworkRelated.NodeInfo;
 
@@ -137,7 +138,29 @@ public class ManualReceiveMQMessage {
 		 * EXCHANGE_NAME, severity); }
 		 */
 	}
+private class Receive extends DefaultConsumer{
+	private byte[] body;
+	private String strMessage;
+	
+	public Receive(Channel channel) {
+		super(channel);
+		// TODO Auto-generated constructor stub
+	}
 
+	/* (non-Javadoc)
+	 * @see com.rabbitmq.client.DefaultConsumer#handleDelivery(java.lang.String, com.rabbitmq.client.Envelope, com.rabbitmq.client.AMQP.BasicProperties, byte[])
+	 */
+	@Override
+	public void handleDelivery(String consumerTag, Envelope envelope, BasicProperties properties, byte[] body)
+			throws IOException {
+		// TODO Auto-generated method stub
+		System.out.println(
+				" From handleDelivery[x] Received '" + envelope.getRoutingKey() + "':'" + body.toString() + "'");
+	}
+		
+}
+	
+	
 	// consider a inneral thread to get the cpu usage,and inneral thread to run
 	// the rpc call,just simulate it!!
 	public void receive() throws Exception { // 开始接收MQ的队列
@@ -194,7 +217,7 @@ public class ManualReceiveMQMessage {
 		@Override
 		public void run() {
 			HessianProxyFactory factory = new HessianProxyFactory();
-			
+	
 			IHSTest test; //test 
 			try {
 				System.out.println("In thread, start to RPC call!--Test--test  = (IHSTest) factory.create(IHSTest.class,urltest);");
@@ -245,6 +268,7 @@ private class StatusCheck implements Runnable{
 		// 启动CPU进程，获得节点，存到数组里
 		mm.connectToMQ();
 		mm.receive();
+
 		mm.startTCPServer();
 		// mm.getCpuUsage(); // 开始TCP服务器
 	}
