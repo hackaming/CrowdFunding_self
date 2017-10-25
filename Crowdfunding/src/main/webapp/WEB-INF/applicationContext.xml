@@ -44,9 +44,6 @@
 		host="${mq.host}" username="${mq.username}" password="${mq.password}"
 		port="${mq.port}" virtual-host="${mq.vhost}" />
 	<rabbit:admin id="connectAdmin" connection-factory="connectionFactory9" />
-
-    
-        
         
 	<!-- 消息对象json转换类 -->
 	<bean id="jsonMessageConverter"
