@@ -106,7 +106,7 @@ public class OrderController {
 		return null;
 	}
 //2017/10/14
-	@RequestMapping("/order/ordersubmit")  // 原先这个链接不是叫这个名字，是下面这个，现在不用下面这个，改用MQ，2017/10/13
+	@RequestMapping("/order/ordersubmit--20171026")  // 原先这个链接不是叫这个名字，是下面这个，现在不用下面这个，改用MQ，2017/10/13
 	public String orderSubmitToMq(@RequestParam int projectId, @RequestParam String shares, HttpSession session,
 			ModelMap model) {
 		User user = (User) session.getAttribute("user");
@@ -136,6 +136,46 @@ public class OrderController {
 		model.addAttribute("order", order);	
 		return "orders/order_confirm";
 	}
+	
+	@RequestMapping("/order/ordersubmit")  // 测试，简单一点！
+	public String orderSubmitTestForPaper(@RequestParam int projectId, @RequestParam String shares, HttpSession session,
+			ModelMap model) {
+		User user = (User) session.getAttribute("user");
+		if (null != user) { // session里面没有值，则未登录成功，重新登录
+			System.out.println("user id is" + user.getUserId());
+			System.out.println("user name is" + user.getUserName() + "successfully get the user from session.");
+		} else {
+			return "user/login";
+		}
+		Project project = projectservice.getProjectById(projectId);
+		RequestSerialVO requestserialvo = new RequestSerialVO();
+		requestserialvo.setProjectid(projectId);
+		requestserialvo.setUserid(user.getUserId());
+		requestserialvo.setShares(Integer.parseInt(shares));
+		requestserialvo.setPrice(Float.parseFloat(project.getPrice()));
+		requestserialvo.setId(requestserialservice.getRequestSerial(user.getUserId() + ""));
+		logger.info(
+				"now the request serial's been generated and will send to the mq, then will be starting to check if the result shows"
+						+ requestserialvo.getId());
+
+		System.out.println("The requestserial vo's generated, the id is:" + requestserialvo.getId()+"now send to MQ to deal with!");
+		orderproduce.sendDataToQueue("ordersCrowdfunding", requestserialvo);
+		
+		//应该是根据这个请求流水，将数据读出来，跳转order_confirm
+		System.out.println("need to add code here to check the result in Redis");
+		Orders order = new Orders();
+		order.setComment("Testing for paper");
+		order.setCreateDateTime(dateservice.getFullDate());
+		order.setProjectId(projectId);
+		order.setShares(Integer.parseInt(shares));
+		order.setStatus(0);
+		order.setTotalAmount(Integer.parseInt(shares)*Float.parseFloat(project.getPrice()));
+		order.setUserId(user.getUserId());
+		orderservice.saveOrder(order);
+		model.addAttribute("order", order);
+		return "orders/order_confirm";
+	}
+	
 	
 	public void tt(final String key){
 		Timer timer = new Timer();

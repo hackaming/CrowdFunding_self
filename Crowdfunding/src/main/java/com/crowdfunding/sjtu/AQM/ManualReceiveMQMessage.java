@@ -113,7 +113,7 @@ public class ManualReceiveMQMessage {
 	// 连接mq
 	public void connectToMQ() throws Exception {
 		factory = new ConnectionFactory();
-		factory.setHost("192.168.0.104"); // 这些东西要配置文件化
+		factory.setHost("10.62.150.33"); // 这些东西要配置文件化
 		factory.setVirtualHost("crowdfunding");
 		factory.setUsername("crowdfunding");
 		factory.setPassword("crowdfunding");
@@ -202,8 +202,8 @@ private class Receive extends DefaultConsumer{
 
 	private class HessianDealWithOrder implements Runnable {
 		private RequestSerialVO vo=null;
-		private String url = "http://192.168.0.106:9090/Crowdfunding/remote/OrderService"; // need
-		private String urltest = "http://192.168.0.106:9090/Crowdfunding/remote/test"; // need
+		private String url = "http://10.62.150.33:8080/Crowdfunding/remote/OrderService"; // need
+		private String urltest = "http://10.62.150.33:8080/Crowdfunding/remote/test"; // need
 		public HessianDealWithOrder(RequestSerialVO vo, String nodesName) {
 			this.vo = vo;
 			System.out.println("Check if the vo's type is what?"+vo.getClass());
@@ -220,11 +220,7 @@ private class Receive extends DefaultConsumer{
 	
 			IHSTest test; //test 
 			try {
-				System.out.println("In thread, start to RPC call!--Test--test  = (IHSTest) factory.create(IHSTest.class,urltest);");
-				test  = (IHSTest) factory.create(IHSTest.class,urltest);
-				System.out.println(test.hello());
-				System.out.println("RPC call test end.--System.out.println(test.hello());");
-				System.out.println("In thread, start to RPC call!");
+				System.out.println(url);
 				IOrderService os = (IOrderService) factory.create(IOrderService.class,url);
 				System.out.println("Now begin to call os.saveOrder(vo)!");
 				if ( os==null || vo==null){
