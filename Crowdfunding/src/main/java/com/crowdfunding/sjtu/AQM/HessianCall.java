@@ -4,8 +4,8 @@ import com.caucho.hessian.client.HessianProxyFactory;
 import com.crowdfunding.sjtu.Vo.RequestSerialVO;
 
 public class HessianCall {
-	private static String url = "http://10.62.150.33:8080/Crowdfunding/remote/OrderService"; // need
-	private static String url1 = "http://10.62.150.33:8080/Crowdfunding/remote/test"; // need
+	private static String url = "http://192.168.0.106:9090/Crowdfunding/remote/OrderService"; // need
+	private static String url1 = "http://192.168.0.106:9090/Crowdfunding/remote/test"; // need
 
 	public static void main(String argv[]) throws Exception {
 		RequestSerialVO vo = new RequestSerialVO();
@@ -16,9 +16,10 @@ public class HessianCall {
 		vo.setUserid(55);
 		HessianProxyFactory factory = new HessianProxyFactory();
 		IHSTest is = (IHSTest)factory.create(IHSTest.class, url1);
+		System.out.println("RPC call end, in thread!" + is.hello());
 		
-/*		IOrderService os = (IOrderService) factory.create(IOrderService.class, url);
+		IOrderService os = (IOrderService) factory.create(IOrderService.class, url);
 		os.saveOrderBasedOnSerial(vo); // process
-*/		System.out.println("RPC call end, in thread!" + is.hello());
+		
 	}
 }

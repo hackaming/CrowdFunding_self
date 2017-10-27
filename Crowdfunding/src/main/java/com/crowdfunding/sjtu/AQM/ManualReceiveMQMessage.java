@@ -113,7 +113,7 @@ public class ManualReceiveMQMessage {
 	// 连接mq
 	public void connectToMQ() throws Exception {
 		factory = new ConnectionFactory();
-		factory.setHost("10.62.150.33"); // 这些东西要配置文件化
+		factory.setHost("192.168.0.104"); // 这些东西要配置文件化
 		factory.setVirtualHost("crowdfunding");
 		factory.setUsername("crowdfunding");
 		factory.setPassword("crowdfunding");
@@ -202,8 +202,8 @@ private class Receive extends DefaultConsumer{
 
 	private class HessianDealWithOrder implements Runnable {
 		private RequestSerialVO vo=null;
-		private String url = "http://10.62.150.33:8080/Crowdfunding/remote/OrderService"; // need
-		private String urltest = "http://10.62.150.33:8080/Crowdfunding/remote/test"; // need
+		private String url = "http://192.168.0.106:9090/Crowdfunding/remote/OrderService"; // need
+		private String urltest = "http://192.168.0.106:9090/Crowdfunding/remote/test"; // need
 		public HessianDealWithOrder(RequestSerialVO vo, String nodesName) {
 			this.vo = vo;
 			System.out.println("Check if the vo's type is what?"+vo.getClass());
@@ -226,6 +226,8 @@ private class Receive extends DefaultConsumer{
 				if ( os==null || vo==null){
 					System.out.println("Check if the os or vo's null to displ errors!");
 				}
+				IHSTest ist = (IHSTest) factory.create(IHSTest.class,urltest);
+				
 /*				Orders order=new Orders();
 				order.setComment("dd");
 				order.setProjectId(1);
@@ -234,6 +236,7 @@ private class Receive extends DefaultConsumer{
 				order.setStatus(1);
 				order.setTotalAmount(44f);
 				os.saveOrder(order);*/
+				System.out.println("Now Hessian call the test"+ ist.hello());
 				os.saveOrderBasedOnSerial(vo); // process
 				System.out.println("RPC call end, in thread!");
 			} catch (MalformedURLException e) {

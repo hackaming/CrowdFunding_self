@@ -35,7 +35,7 @@ public class OrderServerInforatmion {
 		dos.close();
 	}
 	public static void loadNodesFromConfiguration(){
-		hm.put("nodename", "10.62.150.33");
+		hm.put("nodename", "192.168.0.104");
 	}
 	public static void writeObject() throws IOException{
 		ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
@@ -45,13 +45,13 @@ public class OrderServerInforatmion {
 		oos.close();
 	}
 	public static void writeClass() throws IOException{
-		s = new Socket("10.62.150.7",8888); //与服务器建立连接，目前运行在本机
-		System.out.println("Connected to the server with 192.168.0.106:8888");
+		s = new Socket("192.168.0.106",8888); //与服务器建立连接，目前运行在本机
+		System.out.println("Connected to the server with 192.168.0.104:8888");
 		ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
 		NodeInfomation ni = new NodeInfomation();
 		CpuUsage cpu = new CpuUsage();
 		ni.setCpuUsage(cpu.getCpuRatioForWindows());
-		ni.setNodeName("10.62.150.33"); //都跑在16上，要根据实际情况调用
+		ni.setNodeName("192.168.0.104"); //都跑在16上，要根据实际情况调用
 		oos.writeObject(ni);
 		oos.flush();
 		oos.close();

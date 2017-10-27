@@ -106,7 +106,7 @@ public class OrderController {
 		return null;
 	}
 //2017/10/14
-	@RequestMapping("/order/ordersubmit--20171026")  // 原先这个链接不是叫这个名字，是下面这个，现在不用下面这个，改用MQ，2017/10/13
+	@RequestMapping("/order/ordersubmit")  // 原先这个链接不是叫这个名字，是下面这个，现在不用下面这个，改用MQ，2017/10/13
 	public String orderSubmitToMq(@RequestParam int projectId, @RequestParam String shares, HttpSession session,
 			ModelMap model) {
 		User user = (User) session.getAttribute("user");
@@ -137,7 +137,7 @@ public class OrderController {
 		return "orders/order_confirm";
 	}
 	
-	@RequestMapping("/order/ordersubmit")  // 测试，简单一点！
+	@RequestMapping("/order/ordersubmit---testnew")  // 测试，简单一点！
 	public String orderSubmitTestForPaper(@RequestParam int projectId, @RequestParam String shares, HttpSession session,
 			ModelMap model) {
 		User user = (User) session.getAttribute("user");
