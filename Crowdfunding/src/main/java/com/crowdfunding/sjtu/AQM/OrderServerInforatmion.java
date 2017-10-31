@@ -17,6 +17,7 @@ public class OrderServerInforatmion {
 	private static HashMap hm=new HashMap();
 	public static void main(String argv[]) throws UnknownHostException, IOException{
 		Timer timer = new Timer();
+		System.out.println("Now app starts!");
 		timer.schedule(new TimerTask() {
 			public void run() {
 				try {

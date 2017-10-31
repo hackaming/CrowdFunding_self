@@ -265,6 +265,7 @@ private class StatusCheck implements Runnable{
 	public static void main(String[] argv) throws Exception {
 		ManualReceiveMQMessage mm = new ManualReceiveMQMessage();
 		// 启动CPU进程，获得节点，存到数组里
+		System.out.println("Now server starts!");
 		mm.connectToMQ();
 		mm.receive();
 
