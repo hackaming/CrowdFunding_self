@@ -78,6 +78,7 @@ public class OrderServiceImpl implements IOrderService{
 		order.setCreateDateTime(dateservice.getFullDate());
 		order.setStatus(0);
 		order.setComment("set status to 0, initial status.");
+		System.out.println("The total amount is:" + order.getTotalAmount() +" is now saved into db!");
 		Serializable i = this.saveOrder(order);
 		//add code here to put the data into the redis 2017/10/14
 		HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();

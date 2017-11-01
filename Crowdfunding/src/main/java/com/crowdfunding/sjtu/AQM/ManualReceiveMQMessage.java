@@ -82,6 +82,8 @@ public class ManualReceiveMQMessage {
 					System.out.println("a new client connected!");
 					ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 					NodeInfomation mni = (NodeInfomation) ois.readObject();
+					System.out.println("NOde information get:"+mni.getNodeName());
+					System.out.println("Node CPU usage get:"+mni.getCpuUsage());
 					boolean bfound=false;
 					for (int i=0;(i<nodesInfo.size()) && (bfound==false);i++){
 						bfound=false;
@@ -113,7 +115,7 @@ public class ManualReceiveMQMessage {
 	// 连接mq
 	public void connectToMQ() throws Exception {
 		factory = new ConnectionFactory();
-		factory.setHost("192.168.0.104"); // 这些东西要配置文件化
+		factory.setHost("10.62.150.33"); // 这些东西要配置文件化
 		factory.setVirtualHost("crowdfunding");
 		factory.setUsername("crowdfunding");
 		factory.setPassword("crowdfunding");
@@ -202,8 +204,8 @@ private class Receive extends DefaultConsumer{
 
 	private class HessianDealWithOrder implements Runnable {
 		private RequestSerialVO vo=null;
-		private String url = "http://192.168.0.106:9090/Crowdfunding/remote/OrderService"; // need
-		private String urltest = "http://192.168.0.106:9090/Crowdfunding/remote/test"; // need
+		private String url = "http://10.62.150.16:9090/Crowdfunding/remote/OrderService"; // need
+		private String urltest = "http://10.62.150.16:9090/Crowdfunding/remote/test"; // need
 		public HessianDealWithOrder(RequestSerialVO vo, String nodesName) {
 			this.vo = vo;
 			System.out.println("Check if the vo's type is what?"+vo.getClass());
