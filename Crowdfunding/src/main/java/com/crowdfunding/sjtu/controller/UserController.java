@@ -54,7 +54,18 @@ public class UserController {
 	public String login(){
 		return "user/login";
 	}
-	
+	@RequestMapping("/checkmongodb")
+	public String checkmongodb(){
+		 Logger logger1 = Logger.getLogger("MongoDB"); 
+		for (int i=0;i<10;i++){
+			logger1.info("{'info':123}");
+			logger1.error("{'error':123}");
+			logger1.warn("{'warn':123}");
+			logger1.debug("{'debug':123}");
+		}
+			
+		return "user/login";
+	}
 	@RequestMapping(value="/user/log",method = RequestMethod.POST)
 	public String login1(@RequestParam String userName,@RequestParam String password, HttpSession session){
 		//@RequestParam("userName") String userName,@RequestParam("password") String password
@@ -75,8 +86,8 @@ public class UserController {
 			//瀵板懎鐣幋锟�
 			//閸氬氦娴嗘い鍦窗閸掓銆冩い鐢告桨
 			//return "redirect:/projectlist";			//also works
-			System.out.println("user id is"+u.getUserId());
-			System.out.println("user name is"+u.getUserName() + "now set it into session");
+			logger.info("user id is"+u.getUserId());
+			logger.info("user name is"+u.getUserName() + "now set it into session");
 			session.setAttribute("user", u);   //登录成功，将user存到session
 			return "forward:/projectlist";
 		}
@@ -102,7 +113,7 @@ public class UserController {
 		User user = new User();		
 		//闂囷拷鐟曚礁濮為崗銉ュ灲閺傤厾鏁ら幋绋〥閺勵垰鎯佺�涙ê婀惃鍕拷鏄忕帆閿涘矁绻曠憰浣癸拷婵婏拷鍐х娑擃亪妫舵０姗堢礉閺勵垯绗夐弰顖涘Ω鏉╂瑤绨烘禒锝囩垳闁姤鏂侀崚鐗堟箛閸斺�崇湴閿涚喕顩︽稉宥囧姧閹貉冨煑鐏炲倷绱扮搾濠冩降鐡掑﹤顦块敍宀�娲块幒銉ㄧ殶閺堝秴濮熺仦鍌氭皑鐞涘奔绨�?
 		//Debug user only
-		System.out.println("registration called");
+		logger.info("registration called");
 		user.setUserName(req.getParameter("userName"));
 		user.setPassword(MD5Util.MD5Encrypt(req.getParameter("password")));
 		user.setSex(req.getParameter("sex"));

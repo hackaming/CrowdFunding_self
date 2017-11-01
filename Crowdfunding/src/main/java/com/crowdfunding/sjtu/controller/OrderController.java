@@ -54,13 +54,13 @@ public class OrderController {
 	public String orderStart(String projectid, HttpServletRequest req, ModelMap model, HttpSession session) {
 		// projectID取不到值还要调试，查一下
 		// String projectid=req.getParameter("projectid");
-		// System.out.println("now project id get in orderconfirm from
+		// logger.info("now project id get in orderconfirm from
 		// ordercontroller is:" + projectid);
 		// show the project detail, ask the user to type in the number of shares
 		// want to buy and other information if there is
 		// then submit???need to confirm
-		System.out.println("The string projectid get is:" + projectid);
-		System.out.println("The string projectid after convert to integer is:" + Integer.parseInt(projectid));
+		logger.info("The string projectid get is:" + projectid);
+		logger.info("The string projectid after convert to integer is:" + Integer.parseInt(projectid));
 		Project project = projectservice.getProjectById(Integer.parseInt(projectid.trim()));
 		model.addAttribute("project", project);
 		// orderSubmitToMq(session); //测试代码，模拟用户下单，直接调用该参数看是否会发送给消息队列
@@ -82,8 +82,8 @@ public class OrderController {
 			ModelMap model) {
 		User user = (User) session.getAttribute("user");
 		if (null != user) { // session里面没有值，则未登录成功，重新登录
-			System.out.println("user id is" + user.getUserId());
-			System.out.println("user name is" + user.getUserName() + "successfully get the user from session.");
+			logger.info("user id is" + user.getUserId());
+			logger.info("user name is" + user.getUserName() + "successfully get the user from session.");
 		} else {
 			return "user/login";
 		}
@@ -99,7 +99,7 @@ public class OrderController {
 				"now the request serial's been generated and will send to the mq, then will be starting to check if the result shows"
 						+ requestserialvo.getId());
 
-		System.out.println("The requestserial vo's generated, the id is:" + requestserialvo.getId());
+		logger.info("The requestserial vo's generated, the id is:" + requestserialvo.getId());
 		orderproduce.sendDataToQueue("ordersCrowdfunding", requestserialvo);
 		// 这里增加查询订单是否结束的代码！！！
 
@@ -111,8 +111,8 @@ public class OrderController {
 			ModelMap model) {
 		User user = (User) session.getAttribute("user");
 		if (null != user) { // session里面没有值，则未登录成功，重新登录
-			System.out.println("user id is" + user.getUserId());
-			System.out.println("user name is" + user.getUserName() + "successfully get the user from session.");
+			logger.info("user id is" + user.getUserId());
+			logger.info("user name is" + user.getUserName() + "successfully get the user from session.");
 		} else {
 			return "user/login";
 		}
@@ -127,11 +127,11 @@ public class OrderController {
 				"now the request serial's been generated and will send to the mq, then will be starting to check if the result shows"
 						+ requestserialvo.getId());
 
-		System.out.println("The requestserial vo's generated, the id is:" + requestserialvo.getId()+"now send to MQ to deal with!");
+		logger.info("The requestserial vo's generated, the id is:" + requestserialvo.getId()+"now send to MQ to deal with!");
 		orderproduce.sendDataToQueue("ordersCrowdfunding", requestserialvo);
 		
 		//应该是根据这个请求流水，将数据读出来，跳转order_confirm
-		System.out.println("need to add code here to check the result in Redis");
+		logger.info("need to add code here to check the result in Redis");
 		Orders order = testRedisWithMapGet(requestserialvo.getId()); //get the order from redis		
 		model.addAttribute("order", order);	
 		return "orders/order_confirm";
@@ -142,8 +142,8 @@ public class OrderController {
 			ModelMap model) {
 		User user = (User) session.getAttribute("user");
 		if (null != user) { // session里面没有值，则未登录成功，重新登录
-			System.out.println("user id is" + user.getUserId());
-			System.out.println("user name is" + user.getUserName() + "successfully get the user from session.");
+			logger.info("user id is" + user.getUserId());
+			logger.info("user name is" + user.getUserName() + "successfully get the user from session.");
 		} else {
 			return "user/login";
 		}
@@ -158,11 +158,11 @@ public class OrderController {
 				"now the request serial's been generated and will send to the mq, then will be starting to check if the result shows"
 						+ requestserialvo.getId());
 
-		System.out.println("The requestserial vo's generated, the id is:" + requestserialvo.getId()+"now send to MQ to deal with!");
+		logger.info("The requestserial vo's generated, the id is:" + requestserialvo.getId()+"now send to MQ to deal with!");
 		orderproduce.sendDataToQueue("ordersCrowdfunding", requestserialvo);
 		
 		//应该是根据这个请求流水，将数据读出来，跳转order_confirm
-		System.out.println("need to add code here to check the result in Redis");
+		logger.info("need to add code here to check the result in Redis");
 		Orders order = new Orders();
 		order.setComment("Testing for paper");
 		order.setCreateDateTime(dateservice.getFullDate());
@@ -204,7 +204,7 @@ public class OrderController {
 		Orders o = null;
 		if ((hash.entries(key).size()!=0)){
 			map =  (HashMap<Object, Object>) hash.entries(key);
-			System.out.println(map);
+			logger.info(map);
 			o = new Orders();
 			o.setComment((String) map.get("comment"));
 			o.setShares((Integer) map.get("shares"));
@@ -215,18 +215,18 @@ public class OrderController {
 			o.setCreateDateTime((String) map.get("createDateTime"));
 			o.setOrderId((Integer) map.get("orderId"));
 		} else {
-			System.out.println("Order get failed,it is null!,Need to think out a way to get the data!");
+			logger.info("Order get failed,it is null!,Need to think out a way to get the data!");
 		}
 		if (o != null){
-			System.out.println("Order get from redis!--start");
-			System.out.println(o.getComment());
-			System.out.println(o.getCreateDateTime());
-			System.out.println(o.getOrderId());
-			System.out.println(o.getUserId());
-			System.out.println(o.getStatus());
-			System.out.println("Order get from redis!--end--now return to order controller");
+			logger.info("Order get from redis!--start");
+			logger.info(o.getComment());
+			logger.info(o.getCreateDateTime());
+			logger.info(o.getOrderId());
+			logger.info(o.getUserId());
+			logger.info(o.getStatus());
+			logger.info("Order get from redis!--end--now return to order controller");
 		} else{
-			System.out.println("Order get failed,it is null!");
+			logger.info("Order get failed,it is null!");
 		}
 
 		return o;
@@ -242,8 +242,8 @@ public class OrderController {
 		// 写完order表的DAO,SERVICE，之后再把这些重新读出来，显示给用户
 		User user = (User) session.getAttribute("user");
 		if (null != user) { // session里面没有值，则未登录成功，重新登录
-			System.out.println("user id is" + user.getUserId());
-			System.out.println("user name is" + user.getUserName() + "successfully get the user from session.");
+			logger.info("user id is" + user.getUserId());
+			logger.info("user name is" + user.getUserName() + "successfully get the user from session.");
 		} else {
 			return "user/login";
 		}
@@ -257,14 +257,14 @@ public class OrderController {
 		order.setStatus(0); // 0 is the initial status, not confirm by user
 		order.setComment("0 is theinitial status, not confirmed by user");
 		orderservice.saveOrder(order);
-		System.out.println("id is:" + order.getOrderId());
+		logger.info("id is:" + order.getOrderId());
 
 		// order = orderservice.saveorupdatecopy(order);
 
 		// 如何将数据从DB里读出来？刚刚那条记录，并显示出来给用户确认，是一个问题。ORDER ID?
 		// Orders confirmOrder = orderservice.getOrderById(orderId) ;
-		// System.out.println("The orderId is from (id):"+id);
-		System.out.println("The orderId is:" + order.getOrderId());
+		// logger.info("The orderId is from (id):"+id);
+		logger.info("The orderId is:" + order.getOrderId());
 		model.addAttribute("order", order);
 		
 		
@@ -282,17 +282,17 @@ public class OrderController {
 				"now the request serial's been generated and will send to the mq, then will be starting to check if the result shows"
 						+ requestserialvo.getId());
 
-		System.out.println("The requestserial vo's generated, the id is:" + requestserialvo.getId());
+		logger.info("The requestserial vo's generated, the id is:" + requestserialvo.getId());
 		orderproduce.sendDataToQueue("ordersCrowdfunding", requestserialvo);
 		
 		
-    	System.out.println("*******now the vo before send to mq is:");
-    	System.out.println(requestserialvo.getId());
-    	System.out.println(requestserialvo.getPrice());
-    	System.out.println(requestserialvo.getProjectid());
-    	System.out.println(requestserialvo.getShares());
-    	System.out.println(requestserialvo.getUserid());
-    	System.out.println("*******end");
+    	logger.info("*******now the vo before send to mq is:");
+    	logger.info(requestserialvo.getId());
+    	logger.info(requestserialvo.getPrice());
+    	logger.info(requestserialvo.getProjectid());
+    	logger.info(requestserialvo.getShares());
+    	logger.info(requestserialvo.getUserid());
+    	logger.info("*******end");
 		
 		//***above section's only for testing!!
 		return "orders/order_confirm";
@@ -302,11 +302,11 @@ public class OrderController {
 	// 更新状态的逻辑在这里写吧，更新完之后，应该是转到PAY里面
 	@RequestMapping("/order/alreadyconfirmed")
 	public String orderConfirmed(Orders order) {
-		// System.out.println("Test to see if the order can be get in this
+		// logger.info("Test to see if the order can be get in this
 		// way:"+order.getOrderId());
 		order.setStatus(1);
 		order.setComment("now the user confirmed he/she needs to pay,time is:" + dateservice.getFullDate());
-		System.out.println("begin to save into db with the new status");
+		logger.info("begin to save into db with the new status");
 		orderservice.saveOrUpdate(order); // update the status, then go to
 											// pay...
 		logger.info("now the user confirmed he/she needs to pay,time is:" + dateservice.getFullDate() + "order id is:"

@@ -43,7 +43,7 @@ public class PayController {
 		modelmap.addFlashAttribute("WIDsubject", "projectId:" + order.getProjectId()); //订单名称
 		modelmap.addFlashAttribute("WIDbody", "dd"); //商品描述 可空
 		
-		System.out.println("(Will transfer to next page?)Total amount in orderpay action is:"+order.getTotalAmount());				
+		logger.info("(Will transfer to next page?)Total amount in orderpay action is:"+order.getTotalAmount());				
 
 		return "alipay/start_pay";
 		//return "orders/order_confirm";
@@ -59,7 +59,7 @@ public class PayController {
 		alipayRequest.setReturnUrl(AlipayConfig.return_url);
 		alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
 		
-		System.out.println("in start_pay.jsp, now start to set the parameters");
+		logger.info("in start_pay.jsp, now start to set the parameters");
 		//商户订单号，商户网站订单系统中唯一订单号，必填
 	 	/*String str2 =request.getAttribute("WIDout_trade_no").toString();
 		String out_trade_no = new String(str2.getBytes("ISO-8859-1"),"UTF-8");*/ 
@@ -86,8 +86,8 @@ public class PayController {
 		 
 		/*str2 =request.getAttribute("WIDbody").toString();
 		String body = new String(str2.getBytes("ISO-8859-1"),"UTF-8"); */
-		System.out.println(out_trade_no + total_amount + subject +body);
-		System.out.println("Now begin to call the setbizcontent");
+		logger.info(out_trade_no + total_amount + subject +body);
+		logger.info("Now begin to call the setbizcontent");
 		alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\"," 
 				+ "\"total_amount\":\""+ total_amount +"\"," 
 				+ "\"subject\":\""+ subject +"\"," 
@@ -103,7 +103,7 @@ public class PayController {
 		//		+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
 		//请求参数可查阅【电脑网站支付的API文档-alipay.trade.page.pay-请求参数】章节
 		
-		System.out.println("Now begin to call the alipayclient to send the request.");
+		logger.info("Now begin to call the alipayclient to send the request.");
 		//请求
 		//交易流水：
 		JournalTractional journal = new JournalTractional();
@@ -117,7 +117,7 @@ public class PayController {
 		
 		String result = alipayClient.pageExecute(alipayRequest).getBody();
 		
-		System.out.println("Now print out the result to the user");
+		logger.info("Now print out the result to the user");
 		//输出
 		//还需要给到交易流水吧？？？？
 /*		PrintWriter out = resp.getWriter();
