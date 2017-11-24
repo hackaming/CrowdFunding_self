@@ -57,11 +57,20 @@ public class UserController {
 	@RequestMapping("/checkmongodb")
 	public String checkmongodb(){
 		 Logger logger1 = Logger.getLogger("MongoDB"); 
+		 Logger logger = Logger.getLogger(this.getClass());
 		for (int i=0;i<10;i++){
 			logger1.info("{'info':123}");
 			logger1.error("{'error':123}");
 			logger1.warn("{'warn':123}");
 			logger1.debug("{'debug':123}");
+			logger1.info("hello mongo");
+		}
+		for (int i=0;i<10;i++){
+			logger.info("{'rootinfo':123}");
+			logger.error("{'rooterror':123}");
+			logger.warn("{'rootwarn':123}");
+			logger.debug("{'rootdebug':123}");
+			logger.info("hello mongo");
 		}
 			
 		return "user/login";
