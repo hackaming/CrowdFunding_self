@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class HttpServer {
-	private static final int port = 8088;
+	private static final int port = 8086;
 	private ServerSocket serverSocket = null;
 	
 	public HttpServer(){
@@ -40,6 +40,9 @@ public class HttpServer {
 		String firstLine = request.substring(0,request.indexOf("\r\n"));
 		String[] parts = firstLine.split(" ");
 		System.out.println("URI gets in getRequest and now return:"+parts);
+	/*	for (int i = 0;i<parts.length;i++){
+			System.out.println(parts[i]);
+		}*/
 		return parts[1];
 	}
 	public String getContentType(String URI){
