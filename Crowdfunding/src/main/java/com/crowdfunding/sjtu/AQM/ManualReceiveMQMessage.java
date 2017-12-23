@@ -72,7 +72,6 @@ public class ManualReceiveMQMessage {
 	
 	// 每收到一个链接就启一个线程进行读取CPU数据，并保存到nodesInfo节点里面
 	private class GetCPUUsageThread implements Runnable {
-		@Override
 		public void run() {
 			// TODO Auto-generated method stub
 			while (bServerStarted) {
