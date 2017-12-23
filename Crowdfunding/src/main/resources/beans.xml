@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- bean definitions here -->
+	<bean id="personService" class="PersonService">
+		<property name="name" value="tfdfdfdft" />
+	</bean>
+	<bean id="userDaoImpl" class="com.sjtu.SpringRelated.UserDaoImpl">
+	</bean>
+	<bean id="userServiceBean" class="com.sjtu.SpringRelated.UserServiceBean">
+	<property name="userId" value="1" />
+	<property name="userName" value="xianming" />
+	<property name="userDao" ref="userDaoImpl" />
+	<property name="hobbies" >
+	<list>
+		<value>323</value>
+		<value>习毛球</value>
+		<value>sssss</value>
+	</list>
+	</property>
+	<property name="scores">
+	<map>
+		<entry key="Eng" value="5" />
+		<entry key="Chinese" value="55" />
+		<entry key="ff" value="22" />
+	</map>
+	</property>
+	
+	</bean>
+
+</beans>
