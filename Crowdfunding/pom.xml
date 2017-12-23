@@ -256,10 +256,10 @@
 				<configuration>
 <!-- 					<source>1.8.0_144</source>
 					<target>1.8.0_144</target> -->
-					<compilerArguments>
+<!-- 					<compilerArguments>
 						<verbose />
 						<bootclasspath>D:/java/jdk/lib/lib/rt.jar</bootclasspath>
-					</compilerArguments>
+					</compilerArguments> -->
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
