@@ -192,6 +192,15 @@
 			<scope>system</scope>
 			<systemPath>D:\java\CrowdFunding_self\Crowdfunding\src\main\webapp\WEB-INF\lib\alipay-sdk-java20170324180803.jar</systemPath>
 		</dependency>
+		
+				<dependency>
+			<groupId>com.caucho</groupId>
+			<artifactId>hessian</artifactId>
+			<version>4.0.7</version>
+			<scope>system</scope>
+			<systemPath>D:\java\respository\com\caucho\hessian\4.0.7\hessian-4.0.7.jar</systemPath>
+		</dependency>
+		
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commonslogging</artifactId>
