@@ -84,7 +84,7 @@ public class ChatServer {
 			try {
 				dis = new DataInputStream(client.getSocket().getInputStream());
 				dos = new DataOutputStream(client.getSocket().getOutputStream());
-				while (client.isStatus()) { // 一直连着
+				while (client.isStatus()) { // 
 					String strdis = dis.readUTF();
 					logger.info("Message that received from the client:" + client + "Message:" + strdis);
 					// now forward the message to the clients??
@@ -97,7 +97,7 @@ public class ChatServer {
 				logger.info(client + "is removed!");
 				e.printStackTrace();
 			} finally {
-				// 如何通知服务器线程结束？？？？
+				// 
 				if (null != dis) {
 					try {
 						dis.close();
