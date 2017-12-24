@@ -192,15 +192,15 @@
 			<scope>system</scope>
 			<systemPath>D:\java\CrowdFunding_self\Crowdfunding\src\main\webapp\WEB-INF\lib\alipay-sdk-java20170324180803.jar</systemPath>
 		</dependency>
-		
-				<dependency>
+
+		<dependency>
 			<groupId>com.caucho</groupId>
 			<artifactId>hessian</artifactId>
 			<version>4.0.7</version>
 			<scope>system</scope>
 			<systemPath>D:\java\respository\com\caucho\hessian\4.0.7\hessian-4.0.7.jar</systemPath>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commonslogging</artifactId>
@@ -263,12 +263,13 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-<!-- 					<source>1.8.0_144</source>
-					<target>1.8.0_144</target> -->
-<!-- 					<compilerArguments>
-						<verbose />
-						<bootclasspath>D:/java/jdk/lib/lib/rt.jar</bootclasspath>
-					</compilerArguments> -->
+					<!-- <source>1.8.0_144</source> <target>1.8.0_144</target> -->
+					<!-- <compilerArguments> <verbose /> <bootclasspath>D:/java/jdk/lib/lib/rt.jar</bootclasspath> 
+						</compilerArguments> -->
+
+					<source>1.8</source>
+					<target>1.8</target>
+
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
