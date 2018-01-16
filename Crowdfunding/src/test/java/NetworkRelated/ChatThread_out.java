@@ -23,7 +23,7 @@ public class ChatThread_out implements Runnable{
 		try {
 			dis = new DataInputStream(client.getSocket().getInputStream());
 			dos = new DataOutputStream(client.getSocket().getOutputStream());
-			while (client.isStatus()){ //一直连着
+			while (client.isStatus()){ //
 				String strdis = dis.readUTF();
 				logger.info("Message that received from the client:"+strdis);
 			}
@@ -32,7 +32,7 @@ public class ChatThread_out implements Runnable{
 			logger.info("exception shows, needs to delete the client?");
 			e.printStackTrace();
 		} finally{
-//如何通知服务器线程结束？？？？
+//
 			if (null != dis){
 				try {
 					dis.close();
